@@ -17,29 +17,26 @@
 
   header {
     text-align: center;
-    padding: 30px 10px 10px;
+    padding: 10px 10px 10px; /* weniger Padding, damit Logos höher stehen */
     color: #fff;
-    margin-top: 20px;
+    margin-top: 10px; /* etwas nach oben verschieben */
   }
 
   /* Obere Logos: HAI + TIWAG */
   .logo-container {
     display: flex;
     justify-content: center; /* zentriert */
-    align-items: flex-end;
-    gap: 20px; /* Abstand zwischen den Logos */
-    margin-bottom: 40px;
+    align-items: center;     /* Logos vertikal mittig */
+    gap: 40px; /* Abstand zwischen Logos */
+    margin-bottom: 20px; /* Abstand zur Überschrift */
   }
 
   .logo-container img:first-child {
-    max-height: 100px; /* HAI-Logo */
-    /* Position horizontal/vertikal anpassen: translateX, translateY */
-    transform: translateX(0);
+    max-height: 100px; /* HAI Logo */
   }
 
   .logo-container img:last-child {
-    max-height: 47px; /* TIWAG-Logo */
-    transform: translateX(0);
+    max-height: 47px; /* TIWAG Logo */
   }
 
   /* Überschrift */
@@ -67,7 +64,7 @@
     max-width: 95%;
     height: 1008px; /* Kalenderhöhe */
     margin-top: 50px;
-    transform: translateY(-101px); /* Kalender 10% nach oben */
+    transform: translateY(101px); /* Web: 10% nach unten */
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -97,7 +94,7 @@
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
-      transform: translateY(-86px); /* Kalender 10% nach oben */
+      transform: translateY(86px); /* Mobile: 10% nach unten */
     }
     .logo-container img:first-child { max-height: 70px; }
     .logo-container img:last-child { max-height: 35px; }

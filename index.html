@@ -33,11 +33,11 @@
     }
     .logo-container img:last-child {
       max-height: 47px;     
-      transform: translateX(-40%); /* 20% zusätzlich nach links */
+      transform: translateX(-55%); /* zusätzlich 15% nach links */
     }
     .title-block {
       display: inline-block;
-      transform: translateY(-10%); /* gesamten Textblock 10% nach oben */
+      transform: translateY(-20%); /* gesamter Textblock 10% höher zusätzlich */
     }
     header h1 {
       font-size: 1.8em;
@@ -53,7 +53,7 @@
       position: relative;
       width: 1200px;
       max-width: 95%;
-      height: 700px;
+      height: 770px; /* 10% höher (700px → 770px) */
       margin-top: 50px;
       background: white;
       border-radius: 12px;
@@ -79,10 +79,10 @@
       z-index: 2;
     }
     @media (max-width: 768px) {
-      .calendar-container { height: 600px; }
+      .calendar-container { height: 660px; }
       .logo-container img:first-child { max-height: 70px; transform: translateX(-15%); }
-      .logo-container img:last-child { max-height: 35px; transform: translateX(-35%); }
-      .title-block { transform: translateY(-8%); }
+      .logo-container img:last-child { max-height: 35px; transform: translateX(-50%); }
+      .title-block { transform: translateY(-18%); }
       header h1 { font-size: 1.4em; }
       header h2 { font-size: 1.1em; }
     }

@@ -5,88 +5,22 @@
 <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
 <style>
   body {
-    margin: 0;
     font-family: "Areno Serif", serif;
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
     color: #fff;
-  }
-
-  header {
     text-align: center;
-    padding: 40px 10px 20px;
-    position: relative;
-    z-index: 10;
   }
 
-  /* Logos */
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 60px;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .logo-container img {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-  }
-
-  .logo-container img:first-child {
-    max-height: 120px;
-    transform: translateX(-10%);
-  }
-
-  .logo-container img:last-child {
-    max-height: 55px;
-    transform: translateX(-20%) translateY(-5px);
-  }
-
-  .logo-container img:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.7));
-  }
-
-  /* Überschrift */
-  .title-block {
-    display: inline-block;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-  }
-
-  header h1 {
-    font-size: 2.5em;
-    margin: 0;
-    line-height: 1.2;
-    color: #fff;
-  }
-
-  header h2 {
-    font-size: 1.8em;
-    margin: 5px 0 0;
-    font-weight: normal;
-    color: #fff;
-  }
-
-  /* Kalender */
   .calendar-container {
-    position: relative;
-    width: 1200px;
-    max-width: 95%;
-    height: 1008px;
-    margin-top: 40px;
-    transform: translateY(-50px);
+    width: 95%;
+    max-width: 1200px;
+    margin: 40px auto;
     background: rgba(255,255,255,0.05);
     border-radius: 20px;
-    overflow: hidden;
+    padding: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     border: 2px solid rgba(255,255,255,0.2);
+    position: relative;
   }
 
   .calendar-container::before {
@@ -101,87 +35,97 @@
     pointer-events: none;
   }
 
-  .calendar-container iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: transparent;
-  }
-
-  /* Social Links */
-  .link-container {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin: 40px 0 60px;
-    font-family: "Areno Serif", serif;
-    font-size: 1.2em;
+  .event {
+    margin: 10px 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: left;
     color: #fff;
-  }
-
-  .link-container a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
     font-weight: bold;
-    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .filters {
+    margin-bottom: 20px;
+  }
+
+  .filters button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: #003789;
     color: #fff;
+    cursor: pointer;
+    font-family: "Areno Serif", serif;
   }
 
-  .link-container a span {
-    font-size: 1.7em;
-    transition: transform 0.3s ease;
+  .filters button:hover {
+    background-color: #d42323;
   }
 
-  .link-container a:hover {
-    transform: scale(1.1);
-    color: #d42323;
-  }
-
-  .link-container a:hover span {
-    transform: scale(1.3);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .calendar-container { 
-      height: 860px; 
-      transform: translateY(-43px);
-    }
-    .logo-container img:first-child { max-height: 90px; transform: translateX(-10%); }
-    .logo-container img:last-child { max-height: 40px; transform: translateX(-20%) translateY(-3px); }
-    header h1 { font-size: 1.8em; }
-    header h2 { font-size: 1.4em; }
-    .link-container { gap: 20px; font-size: 1em; }
-  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
-
-  <div class="title-block">
-    <h1>HC TIWAG Innsbruck</h1>
-    <h2>Eisplan 2025/26</h2>
-  </div>
+  <h1>HC TIWAG Innsbruck</h1>
+  <h2>Eisplan 2025/26</h2>
 </header>
 
-<div class="calendar-container">
-  <iframe 
-    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
-    frameborder="0" scrolling="no"></iframe>
+<div class="filters">
+  <button onclick="showAll()">Alle Termine</button>
+  <button onclick="filterEvents('SP')">Spiele</button>
+  <button onclick="filterEvents('TR')">Training</button>
 </div>
 
-<div class="link-container">
-  <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
-  <a href="https://www.instagram.com/hcinnsbruck" target="_blank"><span>📸</span> Instagram</a>
-  <a href="https://www.facebook.com/haifischbecken" target="_blank"><span>📘</span> Facebook</a>
-</div>
+<div class="calendar-container" id="calendar"></div>
+
+<script>
+  const API_KEY = 'DEIN_API_KEY';
+  const CALENDAR_ID = 'DEIN_KALENDER_ID';
+  let allEvents = [];
+
+  async function fetchEvents() {
+    const now = new Date().toISOString();
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime`;
+    const response = await fetch(url);
+    const data = await response.json();
+    allEvents = data.items;
+    showAll();
+  }
+
+  function showAll() {
+    const container = document.getElementById('calendar');
+    container.innerHTML = '';
+    allEvents.forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'event';
+      div.style.backgroundColor = event.colorId ? `hsl(${parseInt(event.colorId)*30},70%,50%)` : '#003789';
+      div.textContent = `${formatDate(event.start)} - ${event.summary}`;
+      container.appendChild(div);
+    });
+  }
+
+  function filterEvents(tag) {
+    const container = document.getElementById('calendar');
+    container.innerHTML = '';
+    allEvents.filter(e => e.summary.startsWith(tag)).forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'event';
+      div.style.backgroundColor = event.colorId ? `hsl(${parseInt(event.colorId)*30},70%,50%)` : '#003789';
+      div.textContent = `${formatDate(event.start)} - ${event.summary}`;
+      container.appendChild(div);
+    });
+  }
+
+  function formatDate(dateObj) {
+    const date = dateObj.dateTime || dateObj.date;
+    const d = new Date(date);
+    return d.toLocaleString('de-DE', { weekday:'short', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+  }
+
+  fetchEvents();
+</script>
 
 </body>
 </html>

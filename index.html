@@ -121,12 +121,14 @@
     transition: transform 0.3s ease, color 0.3s ease;
   }
 
-  .link-container a span { font-size: 1.7em; }
-  /* Hover CI-Blau (#003789) */
+  .link-container a span { font-size: 1.7em; transition: transform 0.3s ease; }
+
+  /* Hover CI-Blau + Animation */
   .link-container a:hover { 
     transform: scale(1.1); 
     color: #003789; 
   }
+  .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
   /* Responsive */
   @media (max-width: 768px) {

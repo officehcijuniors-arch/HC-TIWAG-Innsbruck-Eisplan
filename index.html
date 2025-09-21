@@ -15,7 +15,7 @@
     color: #fff;
   }
 
-  /* Logos (scrollen normal mit) */
+  /* Logos mit Fade-In Effekt */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -24,12 +24,11 @@
     margin: 20px 0 10px;
   }
 
-  /* Fade-In Effekt */
   .logo-container img {
     opacity: 0;
     transform: translateY(-20px);
     transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
   }
 
   .logo-container.loaded img {
@@ -44,7 +43,7 @@
 
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Sticky Schrift (ohne Box, direkt im Farbverlauf) */
+  /* Sticky Header Schrift ohne Box */
   header {
     position: sticky;
     top: 0;
@@ -52,12 +51,13 @@
     text-align: center;
     padding: 15px 10px;
     transition: padding 0.3s ease;
+    background: linear-gradient(135deg, rgba(0,55,137,0.2) 40%, rgba(212,35,35,0.2) 60%);
   }
 
   header.shrink { padding: 5px 10px; }
 
   .title-block {
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
     transition: font-size 0.3s ease;
   }
 
@@ -74,11 +74,11 @@
     max-width: 95%;
     height: 1008px;
     margin-top: 20px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.06);
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.75);
+    border: 1px solid rgba(255,255,255,0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     opacity: 1;
   }
@@ -90,7 +90,7 @@
     width: 500px; height: 500px;
     background: url("HCI.gif") no-repeat center;
     background-size: contain;
-    opacity: 0.12;
+    opacity: 0.15;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -104,7 +104,7 @@
 
   .calendar-container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.8);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.85);
   }
 
   /* Social Links */
@@ -145,13 +145,13 @@
 </head>
 <body>
 
-<!-- Logos scrollen normal mit -->
+<!-- Logos -->
 <div class="logo-container">
   <img src="HAI.png" alt="HAI Logo">
   <img src="TIWAG.jpg" alt="TIWAG Logo">
 </div>
 
-<!-- Sticky Schrift -->
+<!-- Sticky Header -->
 <header id="mainHeader">
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>
@@ -178,9 +178,7 @@
   // Fade-In Logos beim Laden
   window.addEventListener('DOMContentLoaded', () => {
     const logoContainer = document.querySelector('.logo-container');
-    setTimeout(() => {
-      logoContainer.classList.add('loaded');
-    }, 100); 
+    setTimeout(() => { logoContainer.classList.add('loaded'); }, 100); 
   });
 
   // Shrink-Effekt Header & Scroll-Fade für Kalender

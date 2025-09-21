@@ -17,32 +17,34 @@
 
   header {
     text-align: center;
-    padding: 10px 10px 10px; /* weniger Padding, damit Logos höher stehen */
+    padding: 10px 10px 10px;
     color: #fff;
-    margin-top: 10px; /* etwas nach oben verschieben */
+    margin-top: 10px; /* Logos etwas höher */
   }
 
   /* Obere Logos: HAI + TIWAG */
   .logo-container {
     display: flex;
-    justify-content: center; /* zentriert */
-    align-items: center;     /* Logos vertikal mittig */
+    justify-content: center;
+    align-items: center;     
     gap: 40px; /* Abstand zwischen Logos */
-    margin-bottom: 20px; /* Abstand zur Überschrift */
+    margin-bottom: 20px; 
   }
 
   .logo-container img:first-child {
     max-height: 100px; /* HAI Logo */
+    transform: translateX(-10%); /* nach links verschoben für gleiche Abstände */
   }
 
   .logo-container img:last-child {
     max-height: 47px; /* TIWAG Logo */
+    transform: translateX(0);
   }
 
   /* Überschrift */
   .title-block {
     display: inline-block;
-    margin-bottom: 20px; /* Abstand zum Kalender */
+    margin-bottom: 20px;
   }
 
   header h1 {
@@ -62,9 +64,9 @@
     position: relative;
     width: 1200px;
     max-width: 95%;
-    height: 1008px; /* Kalenderhöhe */
+    height: 1008px;
     margin-top: 50px;
-    transform: translateY(101px); /* Web: 10% nach unten */
+    transform: translateY(-101px); /* Web: 10% nach oben */
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -94,9 +96,9 @@
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
-      transform: translateY(86px); /* Mobile: 10% nach unten */
+      transform: translateY(-86px); /* Mobile: 10% nach oben */
     }
-    .logo-container img:first-child { max-height: 70px; }
+    .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
     .logo-container img:last-child { max-height: 35px; }
     header h1 { font-size: 1.4em; }
     header h2 { font-size: 1.1em; }
@@ -106,7 +108,7 @@
 <body>
 
 <header>
-  <!-- Obere Logos zentriert -->
+  <!-- Obere Logos zentriert, HAI leicht nach links -->
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">

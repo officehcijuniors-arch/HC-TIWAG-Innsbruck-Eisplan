@@ -53,8 +53,9 @@
       position: relative;
       width: 1200px;
       max-width: 95%;
-      height: 1109px; /* nochmals 20% höher */
+      height: 700px; /* wieder normal */
       margin-top: 50px;
+      transform: translateY(-20%); /* um 20% nach oben verschoben */
       background: white;
       border-radius: 12px;
       overflow: hidden;
@@ -79,7 +80,7 @@
       z-index: 2;
     }
     @media (max-width: 768px) {
-      .calendar-container { height: 950px; } /* 20% mehr für mobile */
+      .calendar-container { height: 600px; transform: translateY(-20%); }
       .logo-container img:first-child { max-height: 70px; transform: translateX(-15%); }
       .logo-container img:last-child { max-height: 35px; transform: translateX(-50%); }
       .title-block { transform: translateY(-18%); }

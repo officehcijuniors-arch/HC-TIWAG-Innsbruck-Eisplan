@@ -13,9 +13,10 @@
     align-items: center;
     min-height: 100vh;
     color: #fff;
+    overflow-x: hidden;
   }
 
-  /* Logos mit Fade-In Effekt */
+  /* Logos oben */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -43,29 +44,22 @@
 
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Sticky Header Schrift ohne Box */
+  /* Header: nur Schrift, kein Hintergrund */
   header {
     position: sticky;
     top: 0;
     z-index: 1000;
     text-align: center;
     padding: 15px 10px;
-    transition: padding 0.3s ease;
-    background: linear-gradient(135deg, rgba(0,55,137,0.2) 40%, rgba(212,35,35,0.2) 60%);
+    background: transparent; /* kein Box-Effekt */
   }
-
-  header.shrink { padding: 5px 10px; }
 
   .title-block {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-    transition: font-size 0.3s ease;
   }
 
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
-
-  header.shrink h1 { font-size: 1.4em; }
-  header.shrink h2 { font-size: 1em; }
 
   /* Kalender */
   .calendar-container {
@@ -137,8 +131,6 @@
     .logo-container img:last-child { max-height: 35px; }
     header h1 { font-size: 1.6em; }
     header h2 { font-size: 1.1em; }
-    header.shrink h1 { font-size: 1.2em; }
-    header.shrink h2 { font-size: 0.9em; }
     .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
@@ -151,8 +143,8 @@
   <img src="TIWAG.jpg" alt="TIWAG Logo">
 </div>
 
-<!-- Sticky Header -->
-<header id="mainHeader">
+<!-- Header nur Schrift -->
+<header>
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>
     <h2>Eisplan 2025/26</h2>
@@ -179,27 +171,6 @@
   window.addEventListener('DOMContentLoaded', () => {
     const logoContainer = document.querySelector('.logo-container');
     setTimeout(() => { logoContainer.classList.add('loaded'); }, 100); 
-  });
-
-  // Shrink-Effekt Header & Scroll-Fade für Kalender
-  window.addEventListener("scroll", function() {
-    const header = document.getElementById("mainHeader");
-    const calendar = document.querySelector('.calendar-container');
-    const rect = calendar.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    // Header Shrink
-    if (window.scrollY > 30) {
-      header.classList.add("shrink");
-    } else {
-      header.classList.remove("shrink");
-    }
-
-    // Scroll-Fade für Kalender
-    let visible = 1 - Math.abs(rect.top + rect.height/2 - windowHeight/2) / (windowHeight/2);
-    visible = Math.max(0.3, Math.min(1, visible));
-    calendar.style.opacity = visible;
-    calendar.style.transform = `translateY(${(-5 + (1-visible)*20)}px)`;
   });
 </script>
 

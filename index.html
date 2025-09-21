@@ -7,31 +7,35 @@
   body {
     margin: 0;
     font-family: "Areno Serif", serif;
-    background: linear-gradient(to right, #d42323 50%, #003789 50%);
+    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    color: #000;
+    color: #fff;
   }
 
   header {
     text-align: center;
-    padding: 20px 10px 10px;
+    padding: 40px 10px 20px;
+    position: relative;
+    z-index: 10;
   }
 
-  /* Obere Logos */
+  /* Logos */
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 50px;
+    gap: 60px;
     margin-bottom: 20px;
+    position: relative;
   }
 
   .logo-container img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
   }
 
   .logo-container img:first-child {
@@ -44,30 +48,30 @@
     transform: translateX(-20%) translateY(-5px);
   }
 
-  /* Hover-Effekt für Logos */
   .logo-container img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.7));
   }
 
   /* Überschrift */
   .title-block {
     display: inline-block;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
   }
 
   header h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0;
     line-height: 1.2;
-    color: #003789;
+    color: #fff;
   }
 
   header h2 {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin: 5px 0 0;
     font-weight: normal;
-    color: #d42323;
+    color: #fff;
   }
 
   /* Kalender */
@@ -76,12 +80,13 @@
     width: 1200px;
     max-width: 95%;
     height: 1008px;
-    margin-top: 30px;
+    margin-top: 40px;
     transform: translateY(-50px);
-    background: white;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    border: 2px solid rgba(255,255,255,0.2);
   }
 
   .calendar-container::before {
@@ -91,7 +96,7 @@
     width: 500px; height: 500px;
     background: url("HCI.gif") no-repeat center;
     background-size: contain;
-    opacity: 0.08;
+    opacity: 0.1;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -100,6 +105,7 @@
     width: 100%;
     height: 100%;
     border: 0;
+    background: transparent;
   }
 
   /* Social Links */
@@ -107,27 +113,27 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    margin: 30px 0 50px;
+    margin: 40px 0 60px;
     font-family: "Areno Serif", serif;
     font-size: 1.2em;
+    color: #fff;
   }
 
   .link-container a {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-weight: bold;
     transition: transform 0.3s ease, color 0.3s ease;
-    color: #000;
+    color: #fff;
   }
 
   .link-container a span {
-    font-size: 1.5em;
+    font-size: 1.7em;
     transition: transform 0.3s ease;
   }
 
-  /* Hover-Effekt Social-Links */
   .link-container a:hover {
     transform: scale(1.1);
     color: #d42323;
@@ -139,14 +145,14 @@
 
   /* Responsive */
   @media (max-width: 768px) {
-    .calendar-container {
-      height: 860px;
+    .calendar-container { 
+      height: 860px; 
       transform: translateY(-43px);
     }
     .logo-container img:first-child { max-height: 90px; transform: translateX(-10%); }
     .logo-container img:last-child { max-height: 40px; transform: translateX(-20%) translateY(-3px); }
-    header h1 { font-size: 1.5em; }
-    header h2 { font-size: 1.2em; }
+    header h1 { font-size: 1.8em; }
+    header h2 { font-size: 1.4em; }
     .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
@@ -171,7 +177,6 @@
     frameborder="0" scrolling="no"></iframe>
 </div>
 
-<!-- Social Links -->
 <div class="link-container">
   <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
   <a href="https://www.instagram.com/hcinnsbruck" target="_blank"><span>📸</span> Instagram</a>

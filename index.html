@@ -21,23 +21,22 @@
     margin-top: 10px;
   }
 
-  /* Obere Logos: HAI + TIWAG */
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 40px; /* Abstand zwischen Logos */
+    gap: 40px;
     margin-bottom: 20px; 
   }
 
   .logo-container img:first-child {
-    max-height: 100px; /* HAI Logo */
+    max-height: 100px;
     transform: translateX(-10%);
   }
 
   .logo-container img:last-child {
-    max-height: 47px; /* TIWAG Logo */
-    transform: translateX(-15%) translateY(-5px); /* weiter nach links und etwas höher */
+    max-height: 47px;
+    transform: translateX(-15%) translateY(-5px);
   }
 
   .title-block {
@@ -57,14 +56,13 @@
     font-weight: normal;
   }
 
-  /* Kalendercontainer */
   .calendar-container {
     position: relative;
     width: 1200px;
     max-width: 95%;
     height: 1008px;
     margin-top: 50px;
-    transform: translateY(-50px); /* Web: 5% nach oben */
+    transform: translateY(-50px);
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -89,15 +87,34 @@
     border: 0;
   }
 
+  /* Links unter dem Kalender */
+  .link-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Abstand zwischen Links */
+    margin-top: 20px;
+    font-family: "Areno Serif", serif;
+    font-size: 1.2em;
+  }
+
+  .link-container a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
-      transform: translateY(-43px); /* Mobile: 5% nach oben */
+      transform: translateY(-43px);
     }
     .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
     .logo-container img:last-child { max-height: 35px; transform: translateX(-15%) translateY(-4px); }
     header h1 { font-size: 1.4em; }
     header h2 { font-size: 1.1em; }
+    .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
 </head>
@@ -121,5 +138,11 @@
     frameborder="0" scrolling="no"></iframe>
 </div>
 
-</body>
-</html>
+<!-- Links unter dem Kalender -->
+<div class="link-container">
+  <a href="https://www.hcinnsbruck.at" target="_blank">🌐 www.hcinnsbruck.at</a>
+  <a href="https://www.instagram.com/hcinnsbruck" target="_blank">📸 Instagram</a>
+  <a href="https://www.facebook.com/haifischbecken" target="_blank">📘 Facebook</a>
+</div>
+
+</

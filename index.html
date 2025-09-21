@@ -15,29 +15,13 @@
     color: #fff;
   }
 
-  /* Sticky Header mit Logos + Titel im CI */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    padding: 15px 10px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-
-  header .inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
+  /* Logos (scrollen normal mit) */
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: 60px;
+    margin: 20px 0 10px;
   }
 
   .logo-container img {
@@ -47,15 +31,32 @@
 
   .logo-container img:first-child { max-height: 100px; transform: translateX(-10%); }
   .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-5px); }
-
   .logo-container img:hover { transform: scale(1.05); }
+
+  /* Sticky Titel (bleibt sichtbar, schrumpft beim Scrollen) */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+    text-align: center;
+    padding: 15px 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: padding 0.3s ease;
+  }
+
+  header.shrink { padding: 5px 10px; }
 
   .title-block {
     text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    transition: font-size 0.3s ease;
   }
 
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
+
+  header.shrink h1 { font-size: 1.4em; }
+  header.shrink h2 { font-size: 1em; }
 
   /* Kalender */
   .calendar-container {
@@ -119,22 +120,25 @@
     .logo-container img:last-child { max-height: 35px; }
     header h1 { font-size: 1.6em; }
     header h2 { font-size: 1.1em; }
+    header.shrink h1 { font-size: 1.2em; }
+    header.shrink h2 { font-size: 0.9em; }
     .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="inner">
-    <div class="logo-container">
-      <img src="HAI.png" alt="HAI Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-    <div class="title-block">
-      <h1>HC TIWAG Innsbruck</h1>
-      <h2>Eisplan 2025/26</h2>
-    </div>
+<!-- Logos scrollen normal mit -->
+<div class="logo-container">
+  <img src="HAI.png" alt="HAI Logo">
+  <img src="TIWAG.jpg" alt="TIWAG Logo">
+</div>
+
+<!-- Sticky Schrift -->
+<header id="mainHeader">
+  <div class="title-block">
+    <h1>HC TIWAG Innsbruck</h1>
+    <h2>Eisplan 2025/26</h2>
   </div>
 </header>
 
@@ -151,6 +155,18 @@
   <a href="https://www.instagram.com/hcinnsbruck" target="_blank"><span>📸</span> Instagram</a>
   <a href="https://www.facebook.com/haifischbecken" target="_blank"><span>📘</span> Facebook</a>
 </div>
+
+<script>
+  // Shrink-Effekt beim Scrollen
+  window.addEventListener("scroll", function() {
+    const header = document.getElementById("mainHeader");
+    if (window.scrollY > 30) {
+      header.classList.add("shrink");
+    } else {
+      header.classList.remove("shrink");
+    }
+  });
+</script>
 
 </body>
 </html>

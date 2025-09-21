@@ -24,13 +24,24 @@
     margin: 20px 0 10px;
   }
 
+  /* Fade-In Effekt */
   .logo-container img {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: transform 1s ease, opacity 1s ease;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-    transition: transform 0.3s ease;
   }
 
-  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%); }
-  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-5px); }
+  .logo-container.loaded img {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
+  .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
+  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
+  .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
+
   .logo-container img:hover { transform: scale(1.05); }
 
   /* Sticky Schrift (ohne Box, direkt im Farbverlauf) */
@@ -164,7 +175,15 @@
 </div>
 
 <script>
-  // Shrink-Effekt für Header und Scroll-Fade für Kalender
+  // Fade-In Logos beim Laden
+  window.addEventListener('DOMContentLoaded', () => {
+    const logoContainer = document.querySelector('.logo-container');
+    setTimeout(() => {
+      logoContainer.classList.add('loaded');
+    }, 100); 
+  });
+
+  // Shrink-Effekt Header & Scroll-Fade für Kalender
   window.addEventListener("scroll", function() {
     const header = document.getElementById("mainHeader");
     const calendar = document.querySelector('.calendar-container');

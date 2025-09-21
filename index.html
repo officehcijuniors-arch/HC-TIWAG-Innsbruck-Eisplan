@@ -1,159 +1,154 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
-  <style>
-    /* --------------------------
-       Allgemeine Body-Einstellungen
-    ---------------------------*/
-    body {
-      margin: 0;
-      font-family: "Areno Serif", serif;
-      background: linear-gradient(to right, #d42323 50%, #003789 50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+<meta charset="utf-8">
+<title>HC TIWAG Innsbruck Eisplan 2025/26</title>
+<style>
+  /* ====================================================
+     EINSTELLUNGEN – hier alle Positionen/Größen ändern
+     ==================================================== */
 
-    /* --------------------------
-       Header + Logos
-    ---------------------------*/
-    header {
-      text-align: center;
-      padding: 30px 10px 10px; /* Abstand oben/rechts/links/unten */
-      color: #fff;
-      margin-top: 20px; /* Abstand vom oberen Browserrand */
-    }
+  /* ---------------- Logos ---------------- */
+  --haie-height: 100px;    /* Höhe des Haie-GIF Logos */
+  --haie-left: -20px;      /* Horizontale Verschiebung Haie-GIF */
+  --tiwag-height: 47px;    /* Höhe des TIWAG Logos */
+  --tiwag-left: -55px;     /* Horizontale Verschiebung TIWAG Logo */
+  --logos-top: -30px;      /* Vertikale Verschiebung des gesamten Logo-Blocks */
+  --logo-gap: 20px;        /* Abstand zwischen den beiden Logos */
 
-    /* Container für Logos */
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end; /* Logos an der Unterkante ausrichten */
-      gap: 20px; /* Abstand zwischen den Logos */
-      margin-bottom: 40px; /* Abstand zu Textblock */
-      transform: translateY(-15%); /* Logos nach oben verschieben (veränderbar) */
-    }
+  /* ---------------- Textblock ---------------- */
+  --text-top: -40px;       /* Vertikale Verschiebung des Textblocks */
+  --h1-size: 1.8em;        /* Schriftgröße HC TIWAG Innsbruck */
+  --h2-size: 1.3em;        /* Schriftgröße Eisplan 2025/26 */
 
-    /* Haie-GIF Logo */
-    .logo-container img:first-child {
-      max-height: 100px;   /* Höhe Haie-GIF ändern */
-      transform: translateX(-20%); /* horizontal verschieben */
-    }
+  /* ---------------- Kalender ---------------- */
+  --calendar-width: 1200px;   /* Breite des Kalender-Containers */
+  --calendar-height: 504px;   /* Höhe des Kalender-Containers */
+  --calendar-top: -50px;      /* Vertikale Verschiebung des Kalenders */
+  --calendar-margin: 50px;    /* Abstand zum oberen Bereich (Header/Textblock) */
 
-    /* TIWAG-Logo */
-    .logo-container img:last-child {
-      max-height: 47px;    /* Höhe TIWAG-Logo ändern */
-      transform: translateX(-55%); /* horizontal verschieben, Unterkante bündig mit Haie-GIF */
-    }
+  /* ====================================================
+     STILE – normalerweise nicht ändern
+     ==================================================== */
+  body {
+    margin: 0;
+    font-family: "Areno Serif", serif;
+    background: linear-gradient(to right, #d42323 50%, #003789 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-    /* --------------------------
-       Textblock HC TIWAG / Eisplan
-    ---------------------------*/
-    .title-block {
-      display: inline-block;
-      transform: translateY(-20%); /* ganzen Textblock nach oben verschieben */
-    }
+  header {
+    text-align: center;
+    color: #fff;
+    padding: 30px 10px 10px;
+    margin-top: 20px;
+  }
 
-    header h1 {
-      font-size: 1.8em; /* Schriftgröße ändern */
-      margin: 0;
-      line-height: 1.2;
-    }
+  /* Logo-Block */
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Unterkante bündig */
+    gap: var(--logo-gap);
+    margin-bottom: 40px;
+    position: relative;
+    top: var(--logos-top);
+  }
 
-    header h2 {
-      font-size: 1.3em; /* Schriftgröße ändern */
-      margin: 10px 0 0; /* Abstand nach oben/unten */
-      font-weight: normal;
-    }
+  .logo-container img:first-child {
+    height: var(--haie-height);
+    position: relative;
+    left: var(--haie-left);
+  }
 
-    /* --------------------------
-       Kalender
-    ---------------------------*/
-    .calendar-container {
-      position: relative;
-      width: 1200px;       /* Breite ändern */
-      max-width: 95%;
-      height: 420px;       /* Höhe ändern */
-      margin-top: 50px;    /* Abstand zum Header/Textblock */
-      transform: translateY(-10%); /* ganzen Kalender nach oben verschieben */
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 12px rgba(0,0,0,0.15);
-    }
+  .logo-container img:last-child {
+    height: var(--tiwag-height);
+    position: relative;
+    left: var(--tiwag-left);
+  }
 
-    /* Wasserzeichen im Kalender (Hintergrund-Haie-GIF) */
-    .calendar-container::before {
-      content: "";
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 500px; height: 500px; /* Größe Wasserzeichen ändern */
-      background: url("HCI.gif") no-repeat center;
-      background-size: contain;
-      opacity: 0.08; /* Transparenz anpassen */
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 1;
-    }
+  /* Textblock */
+  .title-block {
+    position: relative;
+    top: var(--text-top);
+  }
 
-    /* Iframe Kalender */
-    .calendar-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      position: relative;
-      z-index: 2;
-    }
+  header h1 { font-size: var(--h1-size); margin: 0; line-height: 1.2; }
+  header h2 { font-size: var(--h2-size); margin: 10px 0 0; font-weight: normal; }
 
-    /* --------------------------
-       Responsive Anpassungen
-    ---------------------------*/
-    @media (max-width: 768px) {
-      .calendar-container { 
-        height: 360px; /* mobile Höhe ändern */
-        transform: translateY(-10%);
-      }
-      .logo-container img:first-child { 
-        max-height: 70px; 
-        transform: translateX(-15%); 
-      }
-      .logo-container img:last-child { 
-        max-height: 35px; 
-        transform: translateX(-50%); 
-      }
-      .title-block { 
-        transform: translateY(-18%); 
-      }
-      header h1 { font-size: 1.4em; }
-      header h2 { font-size: 1.1em; }
+  /* Kalender */
+  .calendar-container {
+    width: var(--calendar-width);
+    max-width: 95%;
+    height: var(--calendar-height);
+    margin-top: var(--calendar-margin);
+    position: relative;
+    top: var(--calendar-top);
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  }
+
+  /* Wasserzeichen-Haie-GIF im Kalender */
+  .calendar-container::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 500px; height: 500px; /* Größe Wasserzeichen */
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.08; /* Transparenz anpassen */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .calendar-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ---------------- Responsive ---------------- */
+  @media (max-width: 768px) {
+    .calendar-container { 
+      height: 430px; 
+      top: var(--calendar-top);
     }
-  </style>
+    .logo-container img:first-child { height: 70px; left: -15px; }
+    .logo-container img:last-child { height: 35px; left: -50px; }
+    .title-block { top: -30px; }
+    header h1 { font-size: 1.4em; }
+    header h2 { font-size: 1.1em; }
+  }
+
+</style>
 </head>
 <body>
 
-  <header>
-    <!-- Logos -->
-    <div class="logo-container">
-      <img src="HCI.gif" alt="HC Innsbruck Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-
-    <!-- Textblock HC TIWAG / Eisplan -->
-    <div class="title-block">
-      <h1>HC TIWAG Innsbruck</h1>
-      <h2>Eisplan 2025/26</h2>
-    </div>
-  </header>
-
-  <!-- Kalender -->
-  <div class="calendar-container">
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna" 
-      frameborder="0" scrolling="no"></iframe>
+<header>
+  <!-- Logos -->
+  <div class="logo-container">
+    <img src="HCI.gif" alt="HC Innsbruck Logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
+
+  <!-- Textblock -->
+  <div class="title-block">
+    <h1>HC TIWAG Innsbruck</h1>
+    <h2>Eisplan 2025/26</h2>
+  </div>
+</header>
+
+<!-- Kalender -->
+<div class="calendar-container">
+  <iframe 
+    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
+    frameborder="0" scrolling="no"></iframe>
+</div>
 
 </body>
 </html>

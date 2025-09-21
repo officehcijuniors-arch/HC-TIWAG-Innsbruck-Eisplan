@@ -15,22 +15,24 @@
     }
     header {
       text-align: center;
-      padding: 30px 10px 10px; /* mehr Platz oben */
+      padding: 30px 10px 10px;
       color: #fff;
-      margin-top: 40px; /* Header weiter nach unten */
+      margin-top: 40px;
     }
     .logo-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px; /* Abstand zwischen Logos */
-      margin-bottom: 30px; /* größerer Abstand zu Überschrift */
+      gap: 20px;
+      margin-bottom: 30px;
     }
     .logo-container img:first-child {
-      max-height: 100px; /* HCI.gif */
+      max-height: 100px;   /* HCI.gif */
+      margin-right: 10px;  /* etwas nach links optisch */
+      transform: translateX(-10px); /* nach links verschoben */
     }
     .logo-container img:last-child {
-      max-height: 52px; /* TIWAG Logo um ~25% kleiner */
+      max-height: 47px; /* TIWAG Logo noch einmal 10% kleiner */
     }
     header h1 {
       font-size: 1.8em;
@@ -47,7 +49,7 @@
       width: 1200px;
       max-width: 95%;
       height: 700px;
-      margin-top: 40px; /* größerer Abstand zum Kalender */
+      margin-top: 40px;
       background: white;
       border-radius: 12px;
       overflow: hidden;
@@ -60,41 +62,4 @@
       width: 500px; height: 500px;
       background: url("HCI.gif") no-repeat center;
       background-size: contain;
-      opacity: 0.08;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .calendar-container iframe {
-      width: 100%; height: 100%;
-      border: 0;
-      position: relative;
-      z-index: 2;
-    }
-    @media (max-width: 768px) {
-      .calendar-container { height: 600px; }
-      .logo-container img:first-child { max-height: 70px; }
-      .logo-container img:last-child { max-height: 40px; }
-      header h1 { font-size: 1.4em; }
-      header h2 { font-size: 1.1em; }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <!-- Logos nebeneinander -->
-    <div class="logo-container">
-      <img src="HCI.gif" alt="HC Innsbruck Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-    <h1>HC TIWAG Innsbruck</h1>
-    <h2>Eisplan 2025/26</h2>
-  </header>
-
-  <div class="calendar-container">
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna" 
-      frameborder="0" scrolling="no"></iframe>
-  </div>
-</body>
-</html>
+      opacity: 0.

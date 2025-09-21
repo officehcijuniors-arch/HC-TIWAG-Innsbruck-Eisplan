@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
 <style>
-  /* Grundlayout */
   body {
     margin: 0;
     font-family: "Areno Serif", serif;
@@ -19,29 +18,28 @@
     text-align: center;
     padding: 10px 10px 10px;
     color: #fff;
-    margin-top: 10px; /* Logos etwas höher */
+    margin-top: 10px;
   }
 
   /* Obere Logos: HAI + TIWAG */
   .logo-container {
     display: flex;
-    justify-content: center; /* zentriert */
-    align-items: flex-end;   /* Unterkante ausrichten */
+    justify-content: center;
+    align-items: flex-end;
     gap: 40px; /* Abstand zwischen Logos */
     margin-bottom: 20px; 
   }
 
   .logo-container img:first-child {
     max-height: 100px; /* HAI Logo */
-    transform: translateX(-10%); /* leicht nach links */
+    transform: translateX(-10%);
   }
 
   .logo-container img:last-child {
     max-height: 47px; /* TIWAG Logo */
-    transform: translateX(-5%) translateY(-5px); /* etwas nach links und höher */
+    transform: translateX(-15%) translateY(-5px); /* weiter nach links und etwas höher */
   }
 
-  /* Überschrift */
   .title-block {
     display: inline-block;
     margin-bottom: 20px;
@@ -73,7 +71,6 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.15);
   }
 
-  /* Hintergrund-GIF im Kalender (HCI.gif) */
   .calendar-container::before {
     content: "";
     position: absolute;
@@ -92,14 +89,13 @@
     border: 0;
   }
 
-  /* Mobile-Version */
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
       transform: translateY(-43px); /* Mobile: 5% nach oben */
     }
     .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
-    .logo-container img:last-child { max-height: 35px; transform: translateX(-5%) translateY(-4px); }
+    .logo-container img:last-child { max-height: 35px; transform: translateX(-15%) translateY(-4px); }
     header h1 { font-size: 1.4em; }
     header h2 { font-size: 1.1em; }
   }
@@ -108,20 +104,17 @@
 <body>
 
 <header>
-  <!-- Obere Logos zentriert, HAI leicht links, TIWAG etwas nach links und höher -->
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
 
-  <!-- Überschrift -->
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>
     <h2>Eisplan 2025/26</h2>
   </div>
 </header>
 
-<!-- Kalender mit Hintergrund-GIF HCI.gif -->
 <div class="calendar-container">
   <iframe 
     src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"

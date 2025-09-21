@@ -25,15 +25,15 @@
   /* Obere Logos: HAI + TIWAG */
   .logo-container {
     display: flex;
-    justify-content: center;
-    align-items: center;     
+    justify-content: center; /* zentriert */
+    align-items: center;     /* vertikal mittig */
     gap: 40px; /* Abstand zwischen Logos */
     margin-bottom: 20px; 
   }
 
   .logo-container img:first-child {
     max-height: 100px; /* HAI Logo */
-    transform: translateX(-10%); /* nach links verschoben für gleiche Abstände */
+    transform: translateX(-10%); /* leicht nach links */
   }
 
   .logo-container img:last-child {
@@ -66,7 +66,7 @@
     max-width: 95%;
     height: 1008px;
     margin-top: 50px;
-    transform: translateY(-101px); /* Web: 10% nach oben */
+    transform: translateY(50px); /* Web: 5% nach unten */
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -96,7 +96,7 @@
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
-      transform: translateY(-86px); /* Mobile: 10% nach oben */
+      transform: translateY(43px); /* Mobile: 5% nach unten */
     }
     .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
     .logo-container img:last-child { max-height: 35px; }

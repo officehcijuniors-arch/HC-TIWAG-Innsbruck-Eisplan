@@ -15,15 +15,22 @@
     color: #fff;
   }
 
-  /* Sticky Header im CI */
+  /* Sticky Header mit Logos + Titel im CI */
   header {
-    text-align: center;
-    padding: 20px 10px;
     position: sticky;
     top: 0;
     z-index: 1000;
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+    padding: 15px 10px;
+    text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  header .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   .logo-container {
@@ -31,8 +38,6 @@
     justify-content: center;
     align-items: flex-end;
     gap: 60px;
-    margin-bottom: 10px;
-    position: relative;
   }
 
   .logo-container img {
@@ -45,24 +50,12 @@
 
   .logo-container img:hover { transform: scale(1.05); }
 
-  .title-block { text-shadow: 1px 1px 5px rgba(0,0,0,0.7); }
-  header h1 { font-size: 2em; margin: 0; }
-  header h2 { font-size: 1.4em; margin: 5px 0 0; font-weight: normal; }
-
-  /* Info-Box */
-  .info-box {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    text-align: left;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  .title-block {
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
   }
 
-  .info-box h3 { margin-top: 0; color: #ffd700; }
-  .info-box ul { list-style: none; padding: 0; margin: 10px 0; }
-  .info-box li { margin: 5px 0; }
+  header h1 { font-size: 2em; margin: 0; }
+  header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
   /* Kalender */
   .calendar-container {
@@ -125,7 +118,7 @@
     .logo-container img:first-child { max-height: 70px; }
     .logo-container img:last-child { max-height: 35px; }
     header h1 { font-size: 1.6em; }
-    header h2 { font-size: 1.2em; }
+    header h2 { font-size: 1.1em; }
     .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
@@ -133,27 +126,17 @@
 <body>
 
 <header>
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
-  <div class="title-block">
-    <h1>HC TIWAG Innsbruck</h1>
-    <h2>Eisplan 2025/26</h2>
+  <div class="inner">
+    <div class="logo-container">
+      <img src="HAI.png" alt="HAI Logo">
+      <img src="TIWAG.jpg" alt="TIWAG Logo">
+    </div>
+    <div class="title-block">
+      <h1>HC TIWAG Innsbruck</h1>
+      <h2>Eisplan 2025/26</h2>
+    </div>
   </div>
 </header>
-
-<!-- Info-Box mit Terminen -->
-<div class="info-box">
-  <h3>Nächste 5 Termine</h3>
-  <ul>
-    <li>21.09.2025 – Training U12</li>
-    <li>23.09.2025 – Spiel HCI vs. Salzburg</li>
-    <li>25.09.2025 – Training U14</li>
-    <li>28.09.2025 – Auswärtsspiel Linz</li>
-    <li>30.09.2025 – Training U16</li>
-  </ul>
-</div>
 
 <!-- Kalender -->
 <div class="calendar-container">

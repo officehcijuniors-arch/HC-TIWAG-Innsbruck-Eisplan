@@ -15,24 +15,17 @@
     color: #fff;
   }
 
-  /* Sticky Header mit Animation */
+  /* Sticky Header im CI */
   header {
     text-align: center;
     padding: 20px 10px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
-    animation: fadeDown 1s ease;
+    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Logos */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -43,88 +36,33 @@
   }
 
   .logo-container img {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    transition: transform 0.3s ease;
   }
 
-  .logo-container img:first-child {
-    max-height: 100px;
-    transform: translateX(-10%);
-  }
+  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%); }
+  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-5px); }
 
-  .logo-container img:last-child {
-    max-height: 50px;
-    transform: translateX(-20%) translateY(-5px);
-  }
+  .logo-container img:hover { transform: scale(1.05); }
 
-  .logo-container img:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.7));
-  }
+  .title-block { text-shadow: 1px 1px 5px rgba(0,0,0,0.7); }
+  header h1 { font-size: 2em; margin: 0; }
+  header h2 { font-size: 1.4em; margin: 5px 0 0; font-weight: normal; }
 
-  /* Überschrift */
-  .title-block {
-    display: inline-block;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-  }
-
-  header h1 {
-    font-size: 2em;
-    margin: 0;
-    color: #fff;
-  }
-
-  header h2 {
-    font-size: 1.4em;
-    margin: 5px 0 0;
-    font-weight: normal;
-    color: #fff;
-  }
-
-  /* Info-Box (nächste 5 Termine + Downloadlink) */
+  /* Info-Box */
   .info-box {
     background: rgba(255,255,255,0.1);
     border-radius: 12px;
     padding: 20px;
-    margin: 30px auto;
+    margin: 20px auto;
     max-width: 800px;
     text-align: left;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    animation: fadeUp 1s ease;
   }
 
-  .info-box h3 {
-    margin-top: 0;
-    color: #ffd700;
-  }
-
-  .info-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-  }
-
-  .info-box li {
-    margin: 5px 0;
-    animation: fadeUp 1s ease;
-  }
-
-  .info-box a {
-    color: #ffd700;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .info-box a:hover {
-    text-decoration: underline;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .info-box h3 { margin-top: 0; color: #ffd700; }
+  .info-box ul { list-style: none; padding: 0; margin: 10px 0; }
+  .info-box li { margin: 5px 0; }
 
   /* Kalender */
   .calendar-container {
@@ -138,7 +76,6 @@
     overflow: hidden;
     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     border: 2px solid rgba(255,255,255,0.2);
-    animation: fadeUp 1.2s ease;
   }
 
   .calendar-container::before {
@@ -166,10 +103,7 @@
     justify-content: center;
     gap: 50px;
     margin: 40px 0 60px;
-    font-family: "Areno Serif", serif;
     font-size: 1.2em;
-    color: #fff;
-    animation: fadeUp 1.5s ease;
   }
 
   .link-container a {
@@ -178,31 +112,18 @@
     align-items: center;
     gap: 10px;
     font-weight: bold;
-    transition: transform 0.3s ease, color 0.3s ease;
     color: #fff;
+    transition: transform 0.3s ease, color 0.3s ease;
   }
 
-  .link-container a span {
-    font-size: 1.7em;
-    transition: transform 0.3s ease;
-  }
-
-  .link-container a:hover {
-    transform: scale(1.1);
-    color: #d42323;
-  }
-
-  .link-container a:hover span {
-    transform: scale(1.3);
-  }
+  .link-container a span { font-size: 1.7em; }
+  .link-container a:hover { transform: scale(1.1); color: #ffd700; }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .calendar-container { 
-      height: 860px; 
-    }
-    .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
-    .logo-container img:last-child { max-height: 35px; transform: translateX(-20%) translateY(-3px); }
+    .calendar-container { height: 860px; }
+    .logo-container img:first-child { max-height: 70px; }
+    .logo-container img:last-child { max-height: 35px; }
     header h1 { font-size: 1.6em; }
     header h2 { font-size: 1.2em; }
     .link-container { gap: 20px; font-size: 1em; }
@@ -222,17 +143,16 @@
   </div>
 </header>
 
-<!-- Info-Box mit nächsten 5 Terminen + Downloadlink -->
+<!-- Info-Box mit Terminen -->
 <div class="info-box">
   <h3>Nächste 5 Termine</h3>
   <ul>
-    <li>24.09.2025 – vs. Salzburg (Heim)</li>
-    <li>28.09.2025 – @ Wien Capitals (Auswärts)</li>
-    <li>01.10.2025 – vs. Bozen (Heim)</li>
-    <li>05.10.2025 – Training U16, Olympiahalle</li>
-    <li>08.10.2025 – Turnier Jugend, Dornbirn</li>
+    <li>21.09.2025 – Training U12</li>
+    <li>23.09.2025 – Spiel HCI vs. Salzburg</li>
+    <li>25.09.2025 – Training U14</li>
+    <li>28.09.2025 – Auswärtsspiel Linz</li>
+    <li>30.09.2025 – Training U16</li>
   </ul>
-  <p><a href="spielplan.pdf" target="_blank">📄 Gesamter Spielplan als PDF herunterladen</a></p>
 </div>
 
 <!-- Kalender -->

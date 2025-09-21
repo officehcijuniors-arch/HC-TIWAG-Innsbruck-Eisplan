@@ -23,8 +23,8 @@
     align-items: flex-end;
     gap: 60px;
     margin: 20px 0 10px;
-    z-index: 10;
     position: relative;
+    z-index: 10;
   }
 
   .logo-container img {
@@ -46,15 +46,15 @@
 
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Sticky Header Schrift ohne Box */
+  /* Sticky Header ohne Box */
   header {
     position: sticky;
     top: 0;
     z-index: 1000;
     text-align: center;
-    padding: 15px 10px;
+    padding: 10px 10px 0;
     transition: padding 0.3s ease;
-    background: linear-gradient(135deg, rgba(0,55,137,0.2) 40%, rgba(212,35,35,0.2) 60%);
+    background: transparent; /* Kein Box-Effekt */
   }
 
   header.shrink { padding: 5px 10px; }
@@ -175,7 +175,7 @@
   <img src="TIWAG.jpg" alt="TIWAG Logo">
 </div>
 
-<!-- Sticky Header -->
+<!-- Sticky Header ohne Box -->
 <header id="mainHeader">
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>

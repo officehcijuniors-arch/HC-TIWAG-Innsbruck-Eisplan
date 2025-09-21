@@ -5,30 +5,30 @@
 <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
 <style>
   /* --------------------------
-     EINSTELLUNGEN (hier alles ändern)
+     Variablen für einfache Anpassung
   ---------------------------*/
-  /* Logos */
-  --haie-height: 100px;   /* Höhe Haie-GIF */
-  --haie-left: -20px;     /* Links/Offset Haie */
-  --tiwag-height: 47px;   /* Höhe TIWAG-Logo */
-  --tiwag-left: -55px;    /* Links/Offset TIWAG */
-  --logos-top: -30px;     /* vertikale Verschiebung Logos */
-  --logo-gap: 20px;       /* Abstand zwischen Logos */
+  :root {
+    /* Logos */
+    --haie-height: 100px;          /* Haie-GIF Höhe */
+    --haie-x: -20%;                /* Haie-GIF horizontal verschieben */
+    --tiwag-height: 47px;          /* TIWAG-Logo Höhe */
+    --tiwag-x: -55%;               /* TIWAG-Logo horizontal verschieben */
+    --logos-y: -15%;               /* Logos vertikal verschieben */
+    --logo-gap: 20px;              /* Abstand zwischen den Logos */
+    --logo-text-gap: 40px;         /* Abstand Logo-Block zum Textblock */
 
-  /* Textblock */
-  --text-top: -40px;      /* vertikale Verschiebung Textblock */
-  --h1-size: 1.8em;
-  --h2-size: 1.3em;
+    /* Textblock */
+    --text-y: -20%;                /* Textblock vertikal verschieben */
+    --h1-size: 1.8em;              /* H1 Schriftgröße */
+    --h2-size: 1.3em;              /* H2 Schriftgröße */
 
-  /* Kalender */
-  --calendar-width: 1200px;
-  --calendar-height: 504px;
-  --calendar-top: -50px;  /* vertikale Verschiebung */
-  --calendar-margin: 50px;
+    /* Kalender */
+    --calendar-width: 1200px;      /* Breite Kalender */
+    --calendar-height: 504px;      /* Höhe Kalender */
+    --calendar-y: -10%;            /* Kalender vertikal verschieben */
+    --calendar-margin-top: 50px;   /* Abstand zum Header/Textblock */
+  }
 
-  /* --------------------------
-     STILE
-  ---------------------------*/
   body {
     margin: 0;
     font-family: "Areno Serif", serif;
@@ -41,48 +41,57 @@
 
   header {
     text-align: center;
-    padding: 30px 10px 10px;
     color: #fff;
+    padding: 30px 10px 10px;
     margin-top: 20px;
   }
 
+  /* Logos */
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: var(--logo-gap);
-    margin-bottom: 40px;
-    position: relative;
-    top: var(--logos-top);
+    margin-bottom: var(--logo-text-gap);
+    transform: translateY(var(--logos-y));
   }
 
   .logo-container img:first-child {
-    height: var(--haie-height);
-    position: relative;
-    left: var(--haie-left);
+    max-height: var(--haie-height);
+    transform: translateX(var(--haie-x));
   }
 
   .logo-container img:last-child {
-    height: var(--tiwag-height);
-    position: relative;
-    left: var(--tiwag-left);
+    max-height: var(--tiwag-height);
+    transform: translateX(var(--tiwag-x));
   }
 
+  /* Textblock */
   .title-block {
-    position: relative;
-    top: var(--text-top);
+    display: inline-block;
+    transform: translateY(var(--text-y));
   }
 
-  header h1 { font-size: var(--h1-size); margin: 0; line-height: 1.2; }
-  header h2 { font-size: var(--h2-size); margin: 10px 0 0; font-weight: normal; }
+  header h1 {
+    font-size: var(--h1-size);
+    margin: 0;
+    line-height: 1.2;
+  }
 
+  header h2 {
+    font-size: var(--h2-size);
+    margin: 10px 0 0;
+    font-weight: normal;
+  }
+
+  /* Kalender */
   .calendar-container {
+    position: relative;
     width: var(--calendar-width);
     max-width: 95%;
     height: var(--calendar-height);
-    margin-top: var(--calendar-margin);
-    position: relative;
-    top: var(--calendar-top);
+    margin-top: var(--calendar-margin-top);
+    transform: translateY(var(--calendar-y));
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -99,12 +108,25 @@
     opacity: 0.08;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    z-index: 1;
   }
 
   .calendar-container iframe {
     width: 100%;
     height: 100%;
     border: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .calendar-container { height: 430px; transform: translateY(var(--calendar-y)); }
+    .logo-container img:first-child { max-height: 70px; transform: translateX(-15%); }
+    .logo-container img:last-child { max-height: 35px; transform: translateX(-50%); }
+    .title-block { transform: translateY(-18%); }
+    header h1 { font-size: 1.4em; }
+    header h2 { font-size: 1.1em; }
   }
 
 </style>
@@ -125,7 +147,7 @@
 
 <div class="calendar-container">
   <iframe 
-    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
+    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna" 
     frameborder="0" scrolling="no"></iframe>
 </div>
 

@@ -5,9 +5,8 @@
 <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
 <style>
   /* ====================================================
-     EINSTELLUNGEN – hier alle Positionen/Größen ändern
+     EINSTELLUNGEN – hier alles ändern
      ==================================================== */
-
   /* ---------------- Logos ---------------- */
   --haie-height: 100px;    /* Höhe des Haie-GIF Logos */
   --haie-left: -20px;      /* Horizontale Verschiebung Haie-GIF */
@@ -22,9 +21,9 @@
   --h2-size: 1.3em;        /* Schriftgröße Eisplan 2025/26 */
 
   /* ---------------- Kalender ---------------- */
-  --calendar-width: 1200px;   /* Breite des Kalender-Containers */
-  --calendar-height: 504px;   /* Höhe des Kalender-Containers */
-  --calendar-top: -50px;      /* Vertikale Verschiebung des Kalenders */
+  --calendar-width: 1200px;   /* Breite des Kalenders */
+  --calendar-height: 1008px;  /* Höhe des Kalenders (doppelt so hoch) */
+  --calendar-top: -100px;     /* Vertikale Verschiebung des Kalenders */
   --calendar-margin: 50px;    /* Abstand zum oberen Bereich (Header/Textblock) */
 
   /* ====================================================
@@ -93,15 +92,14 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.15);
   }
 
-  /* Wasserzeichen-Haie-GIF im Kalender */
   .calendar-container::before {
     content: "";
     position: absolute;
     top: 50%; left: 50%;
-    width: 500px; height: 500px; /* Größe Wasserzeichen */
+    width: 500px; height: 500px;
     background: url("HCI.gif") no-repeat center;
     background-size: contain;
-    opacity: 0.08; /* Transparenz anpassen */
+    opacity: 0.08;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -115,7 +113,7 @@
   /* ---------------- Responsive ---------------- */
   @media (max-width: 768px) {
     .calendar-container { 
-      height: 430px; 
+      height: 860px; /* mobil ebenfalls doppelt so hoch wie vorher (2 × 430px) */
       top: var(--calendar-top);
     }
     .logo-container img:first-child { height: 70px; left: -15px; }

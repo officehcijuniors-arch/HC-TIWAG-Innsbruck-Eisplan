@@ -63,12 +63,13 @@
     max-width: 95%;
     height: 1008px;
     margin-top: 20px;
-    background: rgba(255,255,255,0.08); /* leicht durchsichtig */
-    border-radius: 30px; /* stärker abgerundet */
+    background: rgba(255,255,255,0.08);
+    border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7); /* intensiver Schatten */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
     border: 1px solid rgba(255,255,255,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
   }
 
   .calendar-container::before {
@@ -163,14 +164,25 @@
 </div>
 
 <script>
-  // Shrink-Effekt beim Scrollen
+  // Shrink-Effekt für Header und Scroll-Fade für Kalender
   window.addEventListener("scroll", function() {
     const header = document.getElementById("mainHeader");
+    const calendar = document.querySelector('.calendar-container');
+    const rect = calendar.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Header Shrink
     if (window.scrollY > 30) {
       header.classList.add("shrink");
     } else {
       header.classList.remove("shrink");
     }
+
+    // Scroll-Fade für Kalender
+    let visible = 1 - Math.abs(rect.top + rect.height/2 - windowHeight/2) / (windowHeight/2);
+    visible = Math.max(0.3, Math.min(1, visible));
+    calendar.style.opacity = visible;
+    calendar.style.transform = `translateY(${(-5 + (1-visible)*20)}px)`;
   });
 </script>
 

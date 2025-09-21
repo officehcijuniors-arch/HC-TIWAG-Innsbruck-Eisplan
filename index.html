@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>HC Tiwag Innsbruck Eisplan</title>
+  <title>HC TIWAG Innsbruck Eisplan 2025/2026</title>
   <style>
     body {
       margin: 0;
@@ -18,12 +18,18 @@
       padding: 10px;
       color: #fff;
     }
-    header img {
-      max-height: 100px;
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px; /* Abstand zwischen Logos */
       margin-bottom: 10px;
     }
+    .logo-container img {
+      max-height: 100px;
+    }
     header h1 {
-      font-size: 1.4em;
+      font-size: 1.6em;
       margin: 0;
     }
     .calendar-container {
@@ -55,25 +61,20 @@
       position: relative;
       z-index: 2;
     }
-    /* TIWAG Logo unterhalb */
-    .tiwag-logo {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .tiwag-logo img {
-      max-height: 80px;
-    }
     @media (max-width: 768px) {
       .calendar-container { height: 600px; }
-      header img { max-height: 70px; }
+      .logo-container img { max-height: 70px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- Lokales GIF-Logo -->
-    <img src="HCI.gif" alt="HC Tiwag Innsbruck Logo">
-    <h1>HC Tiwag Innsbruck Eisplan</h1>
+    <!-- Logos nebeneinander -->
+    <div class="logo-container">
+      <img src="HCI.gif" alt="HC Innsbruck Logo">
+      <img src="TIWAG.jpg" alt="TIWAG Logo">
+    </div>
+    <h1>HC TIWAG Innsbruck Eisplan 2025/2026</h1>
   </header>
 
   <div class="calendar-container">
@@ -81,11 +82,5 @@
       src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna" 
       frameborder="0" scrolling="no"></iframe>
   </div>
-
-  <!-- TIWAG Logo unten -->
-  <div class="tiwag-logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
 </body>
 </html>
-

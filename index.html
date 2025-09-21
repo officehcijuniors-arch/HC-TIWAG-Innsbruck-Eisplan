@@ -38,7 +38,7 @@
 
   .logo-container img:last-child {
     max-height: 47px; /* TIWAG Logo */
-    transform: translateY(12px); /* nach unten verschoben, gleiche Unterkante wie HAI */
+    transform: translateX(-5%) translateY(-5px); /* etwas nach links und höher */
   }
 
   /* Überschrift */
@@ -66,7 +66,7 @@
     max-width: 95%;
     height: 1008px;
     margin-top: 50px;
-    transform: translateY(50px); /* Web: 5% nach unten */
+    transform: translateY(-50px); /* Web: 5% nach oben */
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -96,10 +96,10 @@
   @media (max-width: 768px) {
     .calendar-container { 
       height: 860px; 
-      transform: translateY(43px); /* Mobile: 5% nach unten */
+      transform: translateY(-43px); /* Mobile: 5% nach oben */
     }
     .logo-container img:first-child { max-height: 70px; transform: translateX(-10%); }
-    .logo-container img:last-child { max-height: 35px; transform: translateY(8px); }
+    .logo-container img:last-child { max-height: 35px; transform: translateX(-5%) translateY(-4px); }
     header h1 { font-size: 1.4em; }
     header h2 { font-size: 1.1em; }
   }
@@ -108,7 +108,7 @@
 <body>
 
 <header>
-  <!-- Obere Logos zentriert, HAI leicht nach links, TIWAG Unterkante angepasst -->
+  <!-- Obere Logos zentriert, HAI leicht links, TIWAG etwas nach links und höher -->
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">

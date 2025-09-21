@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>HC TIWAG Innsbruck Eisplan 2025/2026</title>
+  <title>HC TIWAG Innsbruck Eisplan 2025/26</title>
   <style>
     body {
       margin: 0;
@@ -15,8 +15,9 @@
     }
     header {
       text-align: center;
-      padding: 10px;
+      padding: 20px 10px 10px;
       color: #fff;
+      margin-top: 20px; /* Header etwas nach unten verschoben */
     }
     .logo-container {
       display: flex;
@@ -25,19 +26,28 @@
       gap: 20px; /* Abstand zwischen Logos */
       margin-bottom: 10px;
     }
-    .logo-container img {
-      max-height: 100px;
+    .logo-container img:first-child {
+      max-height: 100px; /* HCI.gif */
+    }
+    .logo-container img:last-child {
+      max-height: 70px; /* TIWAG Logo etwas kleiner */
     }
     header h1 {
       font-size: 1.6em;
       margin: 0;
+      line-height: 1.2;
+    }
+    header h2 {
+      font-size: 1.2em;
+      margin: 5px 0 0;
+      font-weight: normal;
     }
     .calendar-container {
       position: relative;
       width: 1200px;
       max-width: 95%;
       height: 700px;
-      margin-top: 10px;
+      margin-top: 20px;
       background: white;
       border-radius: 12px;
       overflow: hidden;
@@ -63,7 +73,10 @@
     }
     @media (max-width: 768px) {
       .calendar-container { height: 600px; }
-      .logo-container img { max-height: 70px; }
+      .logo-container img:first-child { max-height: 70px; }
+      .logo-container img:last-child { max-height: 50px; }
+      header h1 { font-size: 1.2em; }
+      header h2 { font-size: 1em; }
     }
   </style>
 </head>
@@ -74,7 +87,8 @@
       <img src="HCI.gif" alt="HC Innsbruck Logo">
       <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
-    <h1>HC TIWAG Innsbruck Eisplan 2025/2026</h1>
+    <h1>HC TIWAG Innsbruck</h1>
+    <h2>Eisplan 2025/26</h2>
   </header>
 
   <div class="calendar-container">

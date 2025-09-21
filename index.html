@@ -33,15 +33,13 @@
   .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Sticky Titel (bleibt sichtbar, schrumpft beim Scrollen) */
+  /* Sticky Schrift (ohne Box, direkt im Farbverlauf) */
   header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
     text-align: center;
     padding: 15px 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: padding 0.3s ease;
   }
 
@@ -134,7 +132,7 @@
   <img src="TIWAG.jpg" alt="TIWAG Logo">
 </div>
 
-<!-- Sticky Schrift -->
+<!-- Sticky Schrift (frei im Verlauf, ohne Box) -->
 <header id="mainHeader">
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>

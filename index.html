@@ -42,7 +42,7 @@
       position: absolute;
       top: 50%; left: 50%;
       width: 500px; height: 500px;
-      background: url("https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/65fae09e7fcd7a502dbded48_hci%20logo.svg") no-repeat center;
+      background: url("HCI.gif") no-repeat center;
       background-size: contain;
       opacity: 0.08;
       transform: translate(-50%, -50%);
@@ -55,6 +55,14 @@
       position: relative;
       z-index: 2;
     }
+    /* TIWAG Logo unterhalb */
+    .tiwag-logo {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .tiwag-logo img {
+      max-height: 80px;
+    }
     @media (max-width: 768px) {
       .calendar-container { height: 600px; }
       header img { max-height: 70px; }
@@ -63,8 +71,8 @@
 </head>
 <body>
   <header>
-    <!-- Logo direkt über URL -->
-    <img src="https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/65fae09e7fcd7a502dbded48_hci%20logo.svg" alt="HC Tiwag Innsbruck Logo">
+    <!-- Lokales GIF-Logo -->
+    <img src="HCI.gif" alt="HC Tiwag Innsbruck Logo">
     <h1>HC Tiwag Innsbruck Eisplan</h1>
   </header>
 
@@ -73,5 +81,11 @@
       src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna" 
       frameborder="0" scrolling="no"></iframe>
   </div>
+
+  <!-- TIWAG Logo unten -->
+  <div class="tiwag-logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
+  </div>
 </body>
 </html>
+

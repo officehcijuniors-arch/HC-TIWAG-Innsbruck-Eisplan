@@ -13,6 +13,7 @@
     align-items: center;
     min-height: 100vh;
     color: #fff;
+    overflow-x: hidden;
   }
 
   /* Logos mit Fade-In Effekt */
@@ -22,6 +23,8 @@
     align-items: flex-end;
     gap: 60px;
     margin: 20px 0 10px;
+    z-index: 10;
+    position: relative;
   }
 
   .logo-container img {
@@ -67,18 +70,37 @@
   header.shrink h1 { font-size: 1.4em; }
   header.shrink h2 { font-size: 1em; }
 
-  /* Kalender */
+  /* Kalender Container mit Parallax-Hintergrund */
+  .calendar-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+    margin-bottom: 60px;
+  }
+
+  .calendar-background {
+    position: absolute;
+    top: 0; left: 50%;
+    width: 120%; height: 120%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+    z-index: 0;
+    transition: transform 0.3s ease;
+  }
+
   .calendar-container {
     position: relative;
     width: 1200px;
     max-width: 95%;
     height: 1008px;
-    margin-top: 20px;
-    background: rgba(255,255,255,0.06);
     border-radius: 30px;
     overflow: hidden;
     box-shadow: 0 25px 70px rgba(0,0,0,0.75);
     border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    z-index: 1;
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     opacity: 1;
   }
@@ -115,6 +137,8 @@
     margin: 40px 0 60px;
     font-size: 1.2em;
     flex-wrap: wrap;
+    z-index: 10;
+    position: relative;
   }
 
   .link-container a {
@@ -159,11 +183,14 @@
   </div>
 </header>
 
-<!-- Kalender -->
-<div class="calendar-container">
-  <iframe 
-    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
-    frameborder="0" scrolling="no"></iframe>
+<!-- Kalender mit Parallax -->
+<div class="calendar-wrapper">
+  <div class="calendar-background"></div>
+  <div class="calendar-container">
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
+      frameborder="0" scrolling="no"></iframe>
+  </div>
 </div>
 
 <!-- Social Links -->
@@ -175,16 +202,17 @@
 </div>
 
 <script>
-  // Fade-In Logos beim Laden
+  // Fade-In Logos
   window.addEventListener('DOMContentLoaded', () => {
     const logoContainer = document.querySelector('.logo-container');
     setTimeout(() => { logoContainer.classList.add('loaded'); }, 100); 
   });
 
-  // Shrink-Effekt Header & Scroll-Fade für Kalender
+  // Scroll-Effekte: Header Shrink + Kalender Scroll-Fade + Parallax
   window.addEventListener("scroll", function() {
     const header = document.getElementById("mainHeader");
     const calendar = document.querySelector('.calendar-container');
+    const bg = document.querySelector('.calendar-background');
     const rect = calendar.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
@@ -195,13 +223,14 @@
       header.classList.remove("shrink");
     }
 
-    // Scroll-Fade für Kalender
+    // Kalender Scroll-Fade
     let visible = 1 - Math.abs(rect.top + rect.height/2 - windowHeight/2) / (windowHeight/2);
     visible = Math.max(0.3, Math.min(1, visible));
     calendar.style.opacity = visible;
     calendar.style.transform = `translateY(${(-5 + (1-visible)*20)}px)`;
-  });
-</script>
 
-</body>
-</html>
+    // Parallax Hintergrund
+    const parallaxY = (window.scrollY * 0.1);
+    bg.style.transform = `translate(-50%, ${-50 + parallaxY}px)`;
+  });
+</

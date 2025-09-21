@@ -15,31 +15,31 @@
     }
     header {
       text-align: center;
-      padding: 20px 10px 10px;
+      padding: 30px 10px 10px; /* mehr Platz oben */
       color: #fff;
-      margin-top: 20px; /* Header etwas nach unten verschoben */
+      margin-top: 40px; /* Header weiter nach unten */
     }
     .logo-container {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 20px; /* Abstand zwischen Logos */
-      margin-bottom: 10px;
+      margin-bottom: 30px; /* größerer Abstand zu Überschrift */
     }
     .logo-container img:first-child {
       max-height: 100px; /* HCI.gif */
     }
     .logo-container img:last-child {
-      max-height: 70px; /* TIWAG Logo etwas kleiner */
+      max-height: 52px; /* TIWAG Logo um ~25% kleiner */
     }
     header h1 {
-      font-size: 1.6em;
+      font-size: 1.8em;
       margin: 0;
       line-height: 1.2;
     }
     header h2 {
-      font-size: 1.2em;
-      margin: 5px 0 0;
+      font-size: 1.3em;
+      margin: 10px 0 0;
       font-weight: normal;
     }
     .calendar-container {
@@ -47,7 +47,7 @@
       width: 1200px;
       max-width: 95%;
       height: 700px;
-      margin-top: 20px;
+      margin-top: 40px; /* größerer Abstand zum Kalender */
       background: white;
       border-radius: 12px;
       overflow: hidden;
@@ -74,9 +74,9 @@
     @media (max-width: 768px) {
       .calendar-container { height: 600px; }
       .logo-container img:first-child { max-height: 70px; }
-      .logo-container img:last-child { max-height: 50px; }
-      header h1 { font-size: 1.2em; }
-      header h2 { font-size: 1em; }
+      .logo-container img:last-child { max-height: 40px; }
+      header h1 { font-size: 1.4em; }
+      header h2 { font-size: 1.1em; }
     }
   </style>
 </head>

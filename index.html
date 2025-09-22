@@ -50,7 +50,7 @@
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons für Kalenderansicht */
+  /* Buttons für Kalender */
   .calendar-buttons {
     display: flex;
     justify-content: center;
@@ -74,7 +74,7 @@
     box-shadow: 0 5px 20px rgba(0,0,0,0.4);
   }
 
-  /* Kalender + Parallax GIF */
+  /* Kalender */
   .calendar-wrapper {
     position: relative;
     width: 1200px;
@@ -83,16 +83,12 @@
   }
   .calendar-bg {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 600px;
-    transform: translate(-50%, -50%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("HCI.gif") no-repeat center;
+    background-size: 600px;
     opacity: 0.08;
+    transform: translateY(0);
     z-index: 0;
-    pointer-events: none;
-  }
-  .calendar-bg img {
-    width: 100%;
-    display: block;
   }
   .calendar-container {
     position: relative;
@@ -173,14 +169,12 @@
   <button onclick="window.open('https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&ctz=Europe%2FVienna', '_blank')">Externe Ansicht</button>
 </div>
 
-<!-- Kalender + GIF Parallax -->
+<!-- Kalender mit Parallax -->
 <div class="calendar-wrapper">
-  <div class="calendar-bg" id="calendar-bg">
-    <img src="HCI.gif" alt="Hintergrundanimation">
-  </div>
+  <div class="calendar-bg" id="calendar-bg"></div>
   <div class="calendar-container">
     <iframe id="calendarFrame"
-      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTz=0&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043"
+      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043"
       frameborder="0" scrolling="no"></iframe>
   </div>
 </div>
@@ -194,21 +188,21 @@
 </div>
 
 <script>
-  // Fade-In Logos
+  // Logos Fade-In
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
   });
 
   // Kalender-Ansicht wechseln
   function setCalendarView(view) {
-    const base = "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043&showTz=0";
+    const base = "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043";
     document.getElementById('calendarFrame').src = base + "&mode=" + view;
   }
 
-  // Parallax Hintergrund bewegen
+  // Parallax Hintergrund
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    document.getElementById('calendar-bg').style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px))`;
+    document.getElementById('calendar-bg').style.transform = `translateY(${scrollY * 0.2}px)`;
   });
 </script>
 

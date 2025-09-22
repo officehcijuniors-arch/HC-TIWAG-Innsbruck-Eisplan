@@ -169,8 +169,8 @@
 <!-- Kalender -->
 <div class="calendar-container">
   <iframe id="calendarFrame"
-    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
-    frameborder="0" scrolling="no"></iframe>
+    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTz=0&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043"
+    style="border:solid 1px #777" frameborder="0" scrolling="no"></iframe>
 </div>
 
 <!-- Social Links -->
@@ -189,7 +189,7 @@
 
   // Kalender-Ansicht wechseln
   function setCalendarView(view) {
-    const base = "https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&ctz=Europe%2FVienna";
+    const base = "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTz=0&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043";
     document.getElementById('calendarFrame').src = base + "&mode=" + view;
   }
 </script>

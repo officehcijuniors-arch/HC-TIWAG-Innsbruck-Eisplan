@@ -174,8 +174,9 @@
   <div class="calendar-bg" id="calendar-bg"></div>
   <div class="calendar-container">
     <iframe id="calendarFrame"
-      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043"
-      frameborder="0" scrolling="no"></iframe>
+      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTz=0&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043"
+      frameborder="0"
+      scrolling="no"></iframe>
   </div>
 </div>
 
@@ -195,8 +196,9 @@
 
   // Kalender-Ansicht wechseln
   function setCalendarView(view) {
-    const base = "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043";
-    document.getElementById('calendarFrame').src = base + "&mode=" + view;
+    const base =
+      "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTz=0&src=b2ZmaWNlaGNpanVuaW9yc0BnbWFpbC5jb20&color=%230b8043";
+    document.getElementById("calendarFrame").src = base + "&mode=" + view;
   }
 
   // Parallax Hintergrund

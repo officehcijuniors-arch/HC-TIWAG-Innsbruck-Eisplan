@@ -16,7 +16,7 @@
     overflow-x: hidden;
   }
 
-  /* Logos */
+  /* Logos oben */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -24,89 +24,78 @@
     gap: 60px;
     margin: 20px 0 10px;
   }
+
   .logo-container img {
     opacity: 0;
     transform: translateY(-20px);
     transition: transform 1s ease, opacity 1s ease;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
   }
-  .logo-container.loaded img { opacity: 1; transform: translateY(0); }
+
+  .logo-container.loaded img {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
   .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
   .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
+
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Header */
+  /* Header: nur Schrift, kein Hintergrund */
   header {
     position: sticky;
     top: 0;
     z-index: 1000;
     text-align: center;
     padding: 15px 10px;
-    background: transparent;
+    background: transparent; /* kein Box-Effekt */
   }
-  .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+
+  .title-block {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  }
+
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons für Kalender */
-  .calendar-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-  }
-  .calendar-buttons button {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 25px;
-    padding: 8px 18px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .calendar-buttons button:hover {
-    background: #003789;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  }
-
   /* Kalender */
-  .calendar-wrapper {
+  .calendar-container {
     position: relative;
     width: 1200px;
     max-width: 95%;
-    margin-bottom: 40px;
-  }
-  .calendar-bg {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("HCI.gif") no-repeat center;
-    background-size: 600px;
-    opacity: 0.08;
-    transform: translateY(0);
-    z-index: 0;
-  }
-  .calendar-container {
-    position: relative;
-    height: 1000px;
+    height: 1008px;
+    margin-top: 20px;
     background: rgba(255,255,255,0.06);
     border-radius: 30px;
     overflow: hidden;
     box-shadow: 0 25px 70px rgba(0,0,0,0.75);
     border: 1px solid rgba(255,255,255,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
   }
+
+  .calendar-container::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 500px; height: 500px;
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.15;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
   .calendar-container iframe {
     width: 100%;
     height: 100%;
     border: 0;
     background: transparent;
   }
+
   .calendar-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 30px 90px rgba(0,0,0,0.85);
@@ -117,10 +106,11 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    margin: 20px 0 60px;
+    margin: 40px 0 60px;
     font-size: 1.2em;
     flex-wrap: wrap;
   }
+
   .link-container a {
     text-decoration: none;
     display: flex;
@@ -130,8 +120,14 @@
     color: #fff;
     transition: transform 0.3s ease, color 0.3s ease;
   }
+
   .link-container a span { font-size: 1.7em; transition: transform 0.3s ease; }
-  .link-container a:hover { transform: scale(1.1); color: #003789; }
+
+  /* Hover CI-Blau + Animation */
+  .link-container a:hover { 
+    transform: scale(1.1); 
+    color: #003789; 
+  }
   .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
   /* Responsive */
@@ -153,7 +149,7 @@
   <img src="TIWAG.jpg" alt="TIWAG Logo">
 </div>
 
-<!-- Header -->
+<!-- Header nur Schrift -->
 <header>
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>
@@ -161,48 +157,26 @@
   </div>
 </header>
 
-<!-- Kalender Buttons -->
-<div class="calendar-buttons">
-  <button onclick="setCalendarView('AGENDA')">Terminansicht</button>
-  <button onclick="setCalendarView('WEEK')">Woche</button>
-  <button onclick="setCalendarView('MONTH')">Monat</button>
-  <button onclick="window.open('https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&ctz=Europe%2FVienna', '_blank')">Externe Ansicht</button>
-</div>
-
-<!-- Kalender mit Parallax -->
-<div class="calendar-wrapper">
-  <div class="calendar-bg" id="calendar-bg"></div>
-  <div class="calendar-container">
-    <iframe id="calendarFrame"
-      src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&ctz=Europe%2FVienna"
-      frameborder="0" scrolling="no"></iframe>
-  </div>
+<!-- Kalender -->
+<div class="calendar-container">
+  <iframe 
+    src="https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&mode=WEEK&scrollTime=15:00:00&ctz=Europe%2FVienna"
+    frameborder="0" scrolling="no"></iframe>
 </div>
 
 <!-- Social Links -->
 <div class="link-container">
   <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
-  <a href="https://www.instagram.com/hcijuniors/?hl=de" target="_blank"><span>📱</span> Instagram</a>
-  <a href="https://www.facebook.com/hcijuniors/?locale=de_DE" target="_blank"><span>📘</span> Facebook</a>
+  <a href="https://www.instagram.com/hcinnsbruck" target="_blank"><span>📱</span> Instagram</a>
+  <a href="https://www.facebook.com/haifischbecken" target="_blank"><span>📘</span> Facebook</a>
   <a href="https://www.pictrs.com/hci" target="_blank"><span>📷</span> Foto Shop</a>
 </div>
 
 <script>
-  // Logos Fade-In
+  // Fade-In Logos beim Laden
   window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.logo-container').classList.add('loaded');
-  });
-
-  // Kalender-Ansicht wechseln
-  function setCalendarView(view) {
-    const base = "https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&ctz=Europe%2FVienna";
-    document.getElementById('calendarFrame').src = base + "&mode=" + view;
-  }
-
-  // Parallax Hintergrund
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    document.getElementById('calendar-bg').style.transform = `translateY(${scrollY * 0.2}px)`;
+    const logoContainer = document.querySelector('.logo-container');
+    setTimeout(() => { logoContainer.classList.add('loaded'); }, 100); 
   });
 </script>
 

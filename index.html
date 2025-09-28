@@ -78,17 +78,17 @@
     opacity: 0.15; /* Transparenz */
     transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: 1;
+    z-index: 1; /* hinter dem iFrame */
   }
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
     border: 0; 
-    background: transparent; 
+    background: transparent; /* wichtig für Hai sichtbar */
     opacity: 1; 
-    transition: opacity 0.5s ease; 
     position: relative; 
-    z-index: 2; /* über GIF */
+    z-index: 2; /* über dem Hai */
+    transition: opacity 0.5s ease;
   }
 
   /* Social Links */
@@ -176,30 +176,27 @@ const calendars = {
   ice: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23e4c441)"
 };
 
-let currentCalendar = "";
-let currentView = "WEEK";
+let currentTeam = 'u7lauf';
+let currentView = 'WEEK';
 
 function setCalendarTeam(team) {
-  currentCalendar = calendars[team];
-  fadeUpdateIframe();
+  currentTeam = team;
+  document.getElementById('calendarFrame').style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById('calendarFrame').src = calendars[team] + "&mode=" + currentView;
+    document.getElementById('calendarFrame').onload = () => document.getElementById('calendarFrame').style.opacity = 1;
+  }, 250);
   highlightButtonOnly('team-buttons', 'team-' + team);
 }
 
 function setCalendarView(view) {
   currentView = view;
-  fadeUpdateIframe();
-  highlightButtonOnly('calendar-buttons', 'view-' + view);
-}
-
-function fadeUpdateIframe() {
-  const frame = document.getElementById('calendarFrame');
-  if (!currentCalendar) return;
-  frame.style.opacity = 0;
+  document.getElementById('calendarFrame').style.opacity = 0;
   setTimeout(() => {
-    const url = currentCalendar.includes("mode=") ? currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView) : currentCalendar + "&mode=" + currentView;
-    frame.src = url;
-    frame.onload = () => frame.style.opacity = 1;
-  }, 300);
+    document.getElementById('calendarFrame').src = calendars[currentTeam] + "&mode=" + view;
+    document.getElementById('calendarFrame').onload = () => document.getElementById('calendarFrame').style.opacity = 1;
+  }, 250);
+  highlightButtonOnly('calendar-buttons', 'view-' + view);
 }
 
 function highlightButtonOnly(containerClass, buttonId) {

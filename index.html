@@ -81,15 +81,15 @@
     background: #d42323;
     border-color: #fff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transform: scale(1.05); /* Einrasten-Effekt */
+    transform: scale(1.05);
   }
 
   /* Kalender */
   .calendar-container {
     position: relative;
-    width: 1200px;
+    width: 1000px;
     max-width: 95%;
-    height: 1008px;
+    height: 850px;
     background: rgba(255,255,255,0.06);
     border-radius: 30px;
     overflow: hidden;
@@ -97,26 +97,11 @@
     border: 1px solid rgba(255,255,255,0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   }
-  .calendar-container::before {
-    content: "";
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 500px; height: 500px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
   .calendar-container iframe {
     width: 100%;
     height: 100%;
     border: 0;
     background: transparent;
-  }
-  .calendar-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 90px rgba(0,0,0,0.85);
   }
 
   /* Social Links */
@@ -152,16 +137,12 @@
     font-family: "Areno Serif", serif;
     pointer-events: none;
   }
-  .signature:hover { color: rgba(255,255,255,0.8); }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .calendar-container { height: 860px; }
+    .calendar-container { height: 700px; }
     .logo-container img:first-child { max-height: 70px; }
     .logo-container img:last-child { max-height: 35px; }
-    header h1 { font-size: 1.6em; }
-    header h2 { font-size: 1.1em; }
-    .link-container { gap: 20px; font-size: 1em; }
   }
 </style>
 </head>
@@ -183,23 +164,22 @@
 
 <!-- Ansicht Buttons -->
 <div class="calendar-buttons">
-  <button onclick="setCalendarView('AGENDA')">Terminansicht</button>
-  <button onclick="setCalendarView('WEEK')">Woche</button>
-  <button onclick="setCalendarView('MONTH')">Monat</button>
-  <button onclick="window.open('https://calendar.google.com/calendar/embed?src=officehcijuniors%40gmail.com&ctz=Europe%2FVienna','_blank')">Externe Ansicht</button>
+  <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Terminansicht</button>
+  <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
+  <button onclick="setCalendarView('MONTH')" id="view-MONTH">Monat</button>
 </div>
 
 <!-- Team Buttons -->
 <div class="team-buttons">
-  <button onclick="setCalendarTeam('u7lauf')">U7/Lauf - ICE</button>
-  <button onclick="setCalendarTeam('u7')">U7</button>
-  <button onclick="setCalendarTeam('u9')">U9</button>
-  <button onclick="setCalendarTeam('u11')">U11</button>
-  <button onclick="setCalendarTeam('u13')">U13</button>
-  <button onclick="setCalendarTeam('u15')">U15</button>
-  <button onclick="setCalendarTeam('u17')">U17</button>
-  <button onclick="setCalendarTeam('u20')">U20</button>
-  <button onclick="setCalendarTeam('ice')">ICE</button>
+  <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">U7/Lauf - ICE</button>
+  <button onclick="setCalendarTeam('u7')" id="team-u7">U7</button>
+  <button onclick="setCalendarTeam('u9')" id="team-u9">U9</button>
+  <button onclick="setCalendarTeam('u11')" id="team-u11">U11</button>
+  <button onclick="setCalendarTeam('u13')" id="team-u13">U13</button>
+  <button onclick="setCalendarTeam('u15')" id="team-u15">U15</button>
+  <button onclick="setCalendarTeam('u17')" id="team-u17">U17</button>
+  <button onclick="setCalendarTeam('u20')" id="team-u20">U20</button>
+  <button onclick="setCalendarTeam('ice')" id="team-ice">ICE</button>
 </div>
 
 <!-- Kalender -->
@@ -215,60 +195,58 @@
   <a href="https://www.pictrs.com/hci" target="_blank"><span>📷</span> Foto Shop</a>
 </div>
 
-<!-- Signatur -->
 <div class="signature">Designed by MS</div>
 
 <script>
-  // Logos Fade-In
+  // Fade-in Logos
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
-    setCalendarTeam('u7lauf'); // Startansicht
-    highlightButton('team-buttons','u7lauf');
-    highlightButton('calendar-buttons','WEEK');
+    setCalendarTeam('u7lauf'); // Startteam
+    setCalendarView('WEEK');   // Standardansicht
   });
 
+  // Kalender-Links pro Team
   const calendars = {
-    u7lauf:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441",
-    u7:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6",
-    u9:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23c0ca33",
-    u11:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%230b8043",
-    u13:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233f51b5",
-    u15:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%238e24aa",
-    u17:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161",
-    u20:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23ad1457",
-    ice:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23e4c441"
+    u7lauf: "https://calendar.google.com/calendar/embed?...",
+    u7: "https://calendar.google.com/calendar/embed?...",
+    u9: "https://calendar.google.com/calendar/embed?...",
+    u11: "https://calendar.google.com/calendar/embed?...",
+    u13: "https://calendar.google.com/calendar/embed?...",
+    u15: "https://calendar.google.com/calendar/embed?...",
+    u17: "https://calendar.google.com/calendar/embed?...",
+    u20: "https://calendar.google.com/calendar/embed?...",
+    ice: "https://calendar.google.com/calendar/embed?..."
   };
 
   let currentCalendar = "";
   let currentView = "WEEK";
 
+  // Funktion zum Wechseln des Teams
   function setCalendarTeam(team) {
     currentCalendar = calendars[team];
     updateIframe();
-    highlightButton('team-buttons', team);
+    highlightButtonOnly('team-buttons', 'team-' + team); // Nur gedrückter Button animiert
   }
 
+  // Funktion zum Wechseln der Ansicht
   function setCalendarView(view) {
     currentView = view;
     updateIframe();
-    highlightButton('calendar-buttons', view);
+    highlightButtonOnly('calendar-buttons', 'view-' + view); // Nur gedrückter Button animiert
   }
 
+  // Iframe aktualisieren
   function updateIframe() {
-    if (currentCalendar) {
-      const url = currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView);
-      document.getElementById('calendarFrame').src = url;
-    }
+    if (!currentCalendar) return;
+    const url = currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView);
+    document.getElementById('calendarFrame').src = url;
   }
 
-  function highlightButton(containerClass, value) {
-    const buttons = document.querySelectorAll('.' + containerClass + ' button');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    buttons.forEach(btn => {
-      if (btn.textContent.includes(value) || btn.getAttribute('onclick').includes(value)) {
-        btn.classList.add('active');
-      }
-    });
+  // Nur der gedrückte Button bekommt die Animation
+  function highlightButtonOnly(containerClass, buttonId) {
+    document.querySelectorAll('.' + containerClass + ' button').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(buttonId);
+    if(activeBtn) activeBtn.classList.add('active');
   }
 </script>
 </body>

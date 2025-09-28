@@ -51,14 +51,15 @@
   }
 
   .calendar-container { 
-    width: 90%;          /* Breite jetzt in Prozent */
-    max-width: 1600px;   /* maximale Breite für große Bildschirme */
-    height: 850px; 
+    width: 90%;          
+    max-width: 1600px;   
+    height: 900px;        /* etwas größer für Webansicht */
     background: rgba(255,255,255,0.06); 
     border-radius: 30px; 
     overflow: hidden; 
     box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
     border: 1px solid rgba(255,255,255,0.2); 
+    position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
   .calendar-container::before {
@@ -66,8 +67,8 @@
     position: absolute;
     top: 50%; 
     left: 50%;
-    width: 500px; 
-    height: 500px;
+    width: 450px;       /* Höhe/Breite etwas angepasst für Webansicht */
+    height: 450px;
     background: url("HCI.gif") no-repeat center;
     background-size: contain;
     opacity: 0.15;
@@ -95,7 +96,8 @@
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
 
   @media (max-width: 768px) { 
-    .calendar-container { width: 95%; height: 700px; } 
+    .calendar-container { width: 95%; height: 750px; } /* mobile Höhe etwas länger */
+    .calendar-container::before { width: 350px; height: 350px; } /* Hai proportional */
     .logo-container img:first-child { max-height: 70px; } 
     .logo-container img:last-child { max-height: 35px; } 
   }

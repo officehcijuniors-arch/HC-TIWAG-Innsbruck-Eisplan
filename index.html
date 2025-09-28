@@ -16,7 +16,6 @@
     overflow-x: hidden;
   }
 
-  /* Logos */
   .logo-container { display: flex; justify-content: center; align-items: flex-end; gap: 60px; margin: 20px 0 10px; }
   .logo-container img { opacity: 0; transform: translateY(-20px); transition: transform 1s ease, opacity 1s ease; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
   .logo-container.loaded img { opacity: 1; transform: translateY(0); }
@@ -26,13 +25,11 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Header */
   header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons */
   .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
   .calendar-buttons button, .team-buttons button {
     background: rgba(255,255,255,0.12);
@@ -53,7 +50,6 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.45);
   }
 
-  /* Kalendercontainer */
   .calendar-container { 
     position: relative; 
     width: 1200px;
@@ -67,22 +63,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
 
-  /* Hai-GIF über Kalender */
-  .calendar-container::before {
-    content: "";
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    width: 500px; 
-    height: 500px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15; 
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 2; /* über Kalender */
-  }
-
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
@@ -91,20 +71,29 @@
     opacity: 1; 
     transition: opacity 0.5s ease; 
     position: relative; 
-    z-index: 1; /* unter GIF */
+    z-index: 2;
   }
 
-  /* Social Links */
+  #sharkGif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+
   .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
   .link-container a { text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold; color: #fff; transition: transform 0.3s ease, color 0.3s ease; }
   .link-container a span { font-size: 1.5em; transition: transform 0.3s ease; }
   .link-container a:hover { transform: scale(1.1); color: #003789; }
   .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
-  /* Signatur */
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
 
-  /* Responsive */
   @media (max-width: 768px) { 
     .calendar-container { width: 95%; height: 700px; } 
     .logo-container img:first-child { max-height: 70px; } 
@@ -126,14 +115,12 @@
   </div>
 </header>
 
-<!-- Kalenderansicht Buttons -->
 <div class="calendar-buttons">
   <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Terminansicht</button>
   <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
   <button onclick="setCalendarView('MONTH')" id="view-MONTH">Monat</button>
 </div>
 
-<!-- Team Buttons -->
 <div class="team-buttons">
   <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">U7/Lauf - ICE</button>
   <button onclick="setCalendarTeam('u7')" id="team-u7">U7</button>
@@ -148,9 +135,9 @@
 
 <div class="calendar-container">
   <iframe id="calendarFrame"></iframe>
+  <img id="sharkGif" src="HCI.gif" alt="Rotierender Hai">
 </div>
 
-<!-- Social Links -->
 <div class="link-container">
   <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
   <a href="https://www.instagram.com/hcijuniors/?hl=de" target="_blank"><span>📱</span> Instagram</a>
@@ -167,7 +154,6 @@ window.addEventListener('DOMContentLoaded', () => {
   setCalendarView('WEEK');   
 });
 
-// Alle iFrame-Links mit korrekten Farben
 const calendars = {
   u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441)",
   u7: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6)",
@@ -202,15 +188,16 @@ function fadeUpdateIframe() {
   setTimeout(() => {
     const url = currentCalendar.includes("mode=") ? currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView) : currentCalendar + "&mode=" + currentView;
     frame.src = url;
-    frame.onload = () => frame.style.opacity = 1;
+    frame.style.opacity = 1;
   }, 300);
 }
 
-function highlightButtonOnly(containerClass, buttonId) {
-  document.querySelectorAll('.' + containerClass + ' button').forEach(btn => btn.classList.remove('active'));
-  const activeBtn = document.getElementById(buttonId);
-  if(activeBtn) activeBtn.classList.add('active');
+function highlightButtonOnly(containerClass, activeId) {
+  const container = document.querySelector('.' + containerClass);
+  container.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(activeId).classList.add('active');
 }
 </script>
+
 </body>
 </html>

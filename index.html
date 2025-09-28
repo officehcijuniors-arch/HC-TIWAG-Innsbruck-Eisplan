@@ -26,13 +26,13 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Titel (scrollt nicht mit) */
+  /* Header */
   header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons für Kalenderansicht */
+  /* Buttons */
   .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
   .calendar-buttons button, .team-buttons button {
     background: rgba(255,255,255,0.12);
@@ -67,7 +67,22 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
 
-  /* iFrame Kalender */
+  /* Hai-GIF über Kalender */
+  .calendar-container::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    width: 500px; 
+    height: 500px;
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.15; 
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2; /* über Kalender */
+  }
+
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
@@ -76,25 +91,7 @@
     opacity: 1; 
     transition: opacity 0.5s ease; 
     position: relative; 
-    z-index: 2; /* unter dem Hai */ 
-  }
-
-  /* Rotierender Hai über Kalender */
-  .rotating-hai {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 500px;
-    height: 500px;
-    transform: translate(-50%, -50%);
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 9999;
-    animation: spin 20s linear infinite;
-  }
-  @keyframes spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    z-index: 1; /* unter GIF */
   }
 
   /* Social Links */
@@ -129,7 +126,7 @@
   </div>
 </header>
 
-<!-- Kalender-Ansicht Buttons -->
+<!-- Kalenderansicht Buttons -->
 <div class="calendar-buttons">
   <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Terminansicht</button>
   <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
@@ -149,10 +146,8 @@
   <button onclick="setCalendarTeam('ice')" id="team-ice">ICE</button>
 </div>
 
-<!-- Kalendercontainer mit iFrame + Hai -->
 <div class="calendar-container">
   <iframe id="calendarFrame"></iframe>
-  <img src="HCI.gif" alt="Hai" class="rotating-hai">
 </div>
 
 <!-- Social Links -->
@@ -166,14 +161,13 @@
 <div class="signature">Designed by MS</div>
 
 <script>
-// Beim Laden Logo animieren & Standard Kalender/Ansicht setzen
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.logo-container').classList.add('loaded');
   setCalendarTeam('u7lauf'); 
   setCalendarView('WEEK');   
 });
 
-// Alle Kalender iFrame URLs
+// Alle iFrame-Links mit korrekten Farben
 const calendars = {
   u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441)",
   u7: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6)",
@@ -189,21 +183,18 @@ const calendars = {
 let currentCalendar = "";
 let currentView = "WEEK";
 
-// Team wechseln
 function setCalendarTeam(team) {
   currentCalendar = calendars[team];
   fadeUpdateIframe();
   highlightButtonOnly('team-buttons', 'team-' + team);
 }
 
-// Ansicht wechseln
 function setCalendarView(view) {
   currentView = view;
   fadeUpdateIframe();
   highlightButtonOnly('calendar-buttons', 'view-' + view);
 }
 
-// iFrame fade & update
 function fadeUpdateIframe() {
   const frame = document.getElementById('calendarFrame');
   if (!currentCalendar) return;
@@ -215,13 +206,11 @@ function fadeUpdateIframe() {
   }, 300);
 }
 
-// Button hervorheben
 function highlightButtonOnly(containerClass, buttonId) {
   document.querySelectorAll('.' + containerClass + ' button').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById(buttonId);
   if(activeBtn) activeBtn.classList.add('active');
 }
 </script>
-
 </body>
 </html>

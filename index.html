@@ -32,7 +32,7 @@
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons als Tabs */
+  /* Buttons */
   .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
   .calendar-buttons button, .team-buttons button {
     background: rgba(255,255,255,0.12);
@@ -46,14 +46,9 @@
     transition: all 0.3s ease;
   }
   .calendar-buttons button:hover, .team-buttons button:hover { background: #d42323; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.35); }
-  .calendar-buttons button.active, .team-buttons button.active {
-    background: #fff;
-    color: #d42323;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.45);
-  }
+  .calendar-buttons button.active, .team-buttons button.active { background: #fff; color: #d42323; transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.45); }
 
-  /* Kalendercontainer mit Hintergrund-Hai */
+  /* Kalendercontainer mit Hai */
   .calendar-container { 
     position: relative; 
     width: 1200px;
@@ -64,31 +59,29 @@
     overflow: hidden; 
     box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
     border: 1px solid rgba(255,255,255,0.2); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
-  }
-  .calendar-container::before {
-    content: "";
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    width: 500px; 
-    height: 500px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15; /* Transparenz */
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 1;
   }
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
     border: 0; 
     background: transparent; 
-    opacity: 1; 
-    transition: opacity 0.5s ease; 
     position: relative; 
-    z-index: 2; /* über GIF */
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  .hai-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.15;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2; /* über iFrame */
   }
 
   /* Social Links */
@@ -145,6 +138,7 @@
 
 <div class="calendar-container">
   <iframe id="calendarFrame"></iframe>
+  <div class="hai-gif"></div>
 </div>
 
 <!-- Social Links -->
@@ -160,12 +154,13 @@
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.logo-container').classList.add('loaded');
-  setCalendarTeam('u7lauf'); 
-  setCalendarView('WEEK');   
+  setCalendarTeam('u7lauf');
+  setCalendarView('WEEK');
 });
 
+// Team-Kalender URLs
 const calendars = {
-  u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441)",
+  u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6)",
   u7: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6)",
   u9: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23c0ca33)",
   u11: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%230b8043)",

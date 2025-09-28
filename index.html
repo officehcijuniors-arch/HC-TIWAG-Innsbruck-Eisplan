@@ -53,7 +53,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.45);
   }
 
-  /* Kalendercontainer mit Hintergrund-Hai */
+  /* Kalendercontainer mit Hai GIF über iframe */
   .calendar-container { 
     position: relative; 
     width: 1200px;
@@ -64,31 +64,29 @@
     overflow: hidden; 
     box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
     border: 1px solid rgba(255,255,255,0.2); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
-  .calendar-container::before {
-    content: "";
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    width: 500px; 
-    height: 500px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15; /* Transparenz */
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 1; /* hinter dem iFrame */
-  }
+
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
     border: 0; 
-    background: transparent; /* wichtig für Hai sichtbar */
-    opacity: 1; 
+    background: transparent; 
     position: relative; 
-    z-index: 2; /* über dem Hai */
-    transition: opacity 0.5s ease;
+    z-index: 1; /* unter dem Hai */
+  }
+
+  .calendar-container .hai-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.15;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2; /* immer über iframe */
   }
 
   /* Social Links */
@@ -145,6 +143,7 @@
 
 <div class="calendar-container">
   <iframe id="calendarFrame"></iframe>
+  <div class="hai-gif"></div>
 </div>
 
 <!-- Social Links -->
@@ -181,20 +180,22 @@ let currentView = 'WEEK';
 
 function setCalendarTeam(team) {
   currentTeam = team;
-  document.getElementById('calendarFrame').style.opacity = 0;
+  const frame = document.getElementById('calendarFrame');
+  frame.style.opacity = 0;
   setTimeout(() => {
-    document.getElementById('calendarFrame').src = calendars[team] + "&mode=" + currentView;
-    document.getElementById('calendarFrame').onload = () => document.getElementById('calendarFrame').style.opacity = 1;
+    frame.src = calendars[team] + "&mode=" + currentView;
+    frame.onload = () => frame.style.opacity = 1;
   }, 250);
   highlightButtonOnly('team-buttons', 'team-' + team);
 }
 
 function setCalendarView(view) {
   currentView = view;
-  document.getElementById('calendarFrame').style.opacity = 0;
+  const frame = document.getElementById('calendarFrame');
+  frame.style.opacity = 0;
   setTimeout(() => {
-    document.getElementById('calendarFrame').src = calendars[currentTeam] + "&mode=" + view;
-    document.getElementById('calendarFrame').onload = () => document.getElementById('calendarFrame').style.opacity = 1;
+    frame.src = calendars[currentTeam] + "&mode=" + view;
+    frame.onload = () => frame.style.opacity = 1;
   }, 250);
   highlightButtonOnly('calendar-buttons', 'view-' + view);
 }
@@ -205,5 +206,6 @@ function highlightButtonOnly(containerClass, buttonId) {
   if(activeBtn) activeBtn.classList.add('active');
 }
 </script>
+
 </body>
 </html>

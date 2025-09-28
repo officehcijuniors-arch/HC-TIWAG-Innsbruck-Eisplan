@@ -16,7 +16,7 @@
     overflow-x: hidden;
   }
 
-  /* Logos oben */
+  /* Logos */
   .logo-container { display: flex; justify-content: center; align-items: flex-end; gap: 60px; margin: 20px 0 10px; }
   .logo-container img { opacity: 0; transform: translateY(-20px); transition: transform 1s ease, opacity 1s ease; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
   .logo-container.loaded img { opacity: 1; transform: translateY(0); }
@@ -26,17 +26,32 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Titel scrollt normal mit */
+  /* Titel normal scrollend */
   header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons */
+  /* Buttons als Tabs */
   .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
-  .calendar-buttons button, .team-buttons button { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 0.9em; color: #fff; font-weight: bold; cursor: pointer; transition: all 0.25s ease; }
+  .calendar-buttons button, .team-buttons button {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 0.95em;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
   .calendar-buttons button:hover, .team-buttons button:hover { background: #d42323; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.35); }
-  .calendar-buttons button.active, .team-buttons button.active { background: #d42323; border-color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transform: scale(1.05); }
+  .calendar-buttons button.active, .team-buttons button.active {
+    background: #fff;
+    color: #d42323;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.45);
+  }
 
   /* Kalendercontainer */
   .calendar-container { 

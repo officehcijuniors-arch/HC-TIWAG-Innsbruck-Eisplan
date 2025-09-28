@@ -26,7 +26,7 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Titel normal scrollend */
+  /* Titel scrollend */
   header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
@@ -53,7 +53,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.45);
   }
 
-  /* Kalendercontainer */
+  /* Kalendercontainer mit Hintergrund-Hai */
   .calendar-container { 
     position: relative; 
     width: 1200px;
@@ -66,7 +66,30 @@
     border: 1px solid rgba(255,255,255,0.2); 
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
-  .calendar-container iframe { width: 100%; height: 100%; border: 0; background: transparent; opacity: 1; transition: opacity 0.5s ease; }
+  .calendar-container::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    width: 500px; 
+    height: 500px;
+    background: url("HCI.gif") no-repeat center;
+    background-size: contain;
+    opacity: 0.15; /* Transparenz */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .calendar-container iframe { 
+    width: 100%; 
+    height: 100%; 
+    border: 0; 
+    background: transparent; 
+    opacity: 1; 
+    transition: opacity 0.5s ease; 
+    position: relative; 
+    z-index: 2; /* über GIF */
+  }
 
   /* Social Links */
   .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
@@ -185,6 +208,5 @@ function highlightButtonOnly(containerClass, buttonId) {
   if(activeBtn) activeBtn.classList.add('active');
 }
 </script>
-
 </body>
 </html>

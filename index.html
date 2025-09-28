@@ -16,7 +16,7 @@
     overflow-x: hidden;
   }
 
-  /* Logos oben */
+  /* Logos */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -54,24 +54,34 @@
   .calendar-buttons, .team-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 12px 0;
     flex-wrap: wrap;
   }
-  .calendar-buttons button, .team-buttons button {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 25px;
-    padding: 8px 18px;
+  .calendar-buttons button,
+  .team-buttons button {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.9em;
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
-  .calendar-buttons button:hover, .team-buttons button:hover {
+  .calendar-buttons button:hover,
+  .team-buttons button:hover {
     background: #d42323;
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+  }
+  .calendar-buttons button.active,
+  .team-buttons button.active {
+    background: #d42323;
+    border-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transform: scale(1.05); /* Einrasten-Effekt */
   }
 
   /* Kalender */
@@ -113,9 +123,9 @@
   .link-container {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    margin: 40px 0 60px;
-    font-size: 1.2em;
+    gap: 30px;
+    margin: 30px 0 50px;
+    font-size: 1.1em;
     flex-wrap: wrap;
   }
   .link-container a {
@@ -127,7 +137,7 @@
     color: #fff;
     transition: transform 0.3s ease, color 0.3s ease;
   }
-  .link-container a span { font-size: 1.7em; transition: transform 0.3s ease; }
+  .link-container a span { font-size: 1.5em; transition: transform 0.3s ease; }
   .link-container a:hover { transform: scale(1.1); color: #003789; }
   .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
@@ -213,13 +223,14 @@
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
     setCalendarTeam('u7lauf'); // Startansicht
+    highlightButton('team-buttons','u7lauf');
+    highlightButton('calendar-buttons','WEEK');
   });
 
-  // Kalenderquellen
   const calendars = {
-    u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441",
-    u7: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6",
-    u9: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23c0ca33",
+    u7lauf:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441",
+    u7:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6",
+    u9:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23c0ca33",
     u11:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%230b8043",
     u13:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233f51b5",
     u15:"https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK&showTitle=0&showTabs=0&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%238e24aa",
@@ -234,11 +245,13 @@
   function setCalendarTeam(team) {
     currentCalendar = calendars[team];
     updateIframe();
+    highlightButton('team-buttons', team);
   }
 
   function setCalendarView(view) {
     currentView = view;
     updateIframe();
+    highlightButton('calendar-buttons', view);
   }
 
   function updateIframe() {
@@ -246,6 +259,16 @@
       const url = currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView);
       document.getElementById('calendarFrame').src = url;
     }
+  }
+
+  function highlightButton(containerClass, value) {
+    const buttons = document.querySelectorAll('.' + containerClass + ' button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    buttons.forEach(btn => {
+      if (btn.textContent.includes(value) || btn.getAttribute('onclick').includes(value)) {
+        btn.classList.add('active');
+      }
+    });
   }
 </script>
 </body>

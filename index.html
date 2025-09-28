@@ -26,13 +26,13 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  /* Header */
+  /* Titel scrollend */
   header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  /* Buttons */
+  /* Buttons als Tabs */
   .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
   .calendar-buttons button, .team-buttons button {
     background: rgba(255,255,255,0.12);
@@ -46,45 +46,42 @@
     transition: all 0.3s ease;
   }
   .calendar-buttons button:hover, .team-buttons button:hover { background: #d42323; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.35); }
-  .calendar-buttons button.active, .team-buttons button.active { background: #fff; color: #d42323; transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.45); }
+  .calendar-buttons button.active, .team-buttons button.active {
+    background: #fff;
+    color: #d42323;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.45);
+  }
 
-  /* Kalendercontainer */
+  /* Kalendercontainer mit Hai über allen Ansichten */
   .calendar-container { 
     position: relative; 
     width: 1200px;
     max-width: 95%; 
     height: 850px; 
-    background: rgba(255,255,255,0.06); 
     border-radius: 30px; 
     overflow: hidden; 
     box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
     border: 1px solid rgba(255,255,255,0.2); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
   }
-
-  /* Hai-GIF transparent über dem Kalender */
-  .calendar-container::before {
-    content: "";
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    width: 500px; 
-    height: 500px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 2; /* Hai über iFrame */
-  }
-
   .calendar-container iframe { 
     width: 100%; 
     height: 100%; 
     border: 0; 
     background: transparent; 
     position: relative; 
-    z-index: 1; /* iFrame unter Hai */
+    z-index: 1; /* unter Hai */
+  }
+  .shark-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 2; /* über iFrame */
   }
 
   /* Social Links */
@@ -94,8 +91,10 @@
   .link-container a:hover { transform: scale(1.1); color: #003789; }
   .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
+  /* Signatur */
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
 
+  /* Responsive */
   @media (max-width: 768px) { 
     .calendar-container { width: 95%; height: 700px; } 
     .logo-container img:first-child { max-height: 70px; } 
@@ -117,14 +116,14 @@
   </div>
 </header>
 
-<!-- Ansichts-Buttons -->
+<!-- Kalenderansicht Buttons -->
 <div class="calendar-buttons">
   <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Terminansicht</button>
   <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
   <button onclick="setCalendarView('MONTH')" id="view-MONTH">Monat</button>
 </div>
 
-<!-- Team-Buttons -->
+<!-- Team Buttons -->
 <div class="team-buttons">
   <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">U7/Lauf - ICE</button>
   <button onclick="setCalendarTeam('u7')" id="team-u7">U7</button>
@@ -138,6 +137,7 @@
 </div>
 
 <div class="calendar-container">
+  <img src="HCI.gif" class="shark-gif" alt="Hai Animation">
   <iframe id="calendarFrame"></iframe>
 </div>
 
@@ -175,21 +175,25 @@ let currentView = "WEEK";
 
 function setCalendarTeam(team) {
   currentCalendar = calendars[team];
-  updateIframe();
+  fadeUpdateIframe();
   highlightButtonOnly('team-buttons', 'team-' + team);
 }
 
 function setCalendarView(view) {
   currentView = view;
-  updateIframe();
+  fadeUpdateIframe();
   highlightButtonOnly('calendar-buttons', 'view-' + view);
 }
 
-function updateIframe() {
+function fadeUpdateIframe() {
   const frame = document.getElementById('calendarFrame');
   if (!currentCalendar) return;
-  const url = currentCalendar.includes("mode=") ? currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView) : currentCalendar + "&mode=" + currentView;
-  frame.src = url;
+  frame.style.opacity = 0;
+  setTimeout(() => {
+    const url = currentCalendar.includes("mode=") ? currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView) : currentCalendar + "&mode=" + currentView;
+    frame.src = url;
+    frame.onload = () => frame.style.opacity = 1;
+  }, 300);
 }
 
 function highlightButtonOnly(containerClass, buttonId) {

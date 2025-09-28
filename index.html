@@ -24,7 +24,8 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  header { position: sticky; top: 0; z-index: 1000; text-align: center; padding: 15px 10px; background: transparent; }
+  /* Titel scrollt jetzt mit */
+  header { text-align: center; padding: 15px 10px; background: transparent; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
@@ -45,7 +46,11 @@
 
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
 
-  @media (max-width: 768px) { .calendar-container { height: 700px; } .logo-container img:first-child { max-height: 70px; } .logo-container img:last-child { max-height: 35px; } }
+  @media (max-width: 768px) { 
+    .calendar-container { height: 700px; } 
+    .logo-container img:first-child { max-height: 70px; } 
+    .logo-container img:last-child { max-height: 35px; } 
+  }
 </style>
 </head>
 <body>
@@ -96,8 +101,8 @@
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.logo-container').classList.add('loaded');
-  setCalendarTeam('u7lauf'); // Start-Kalender
-  setCalendarView('WEEK');   // Standardansicht
+  setCalendarTeam('u7lauf'); 
+  setCalendarView('WEEK');   
 });
 
 const calendars = {
@@ -129,7 +134,7 @@ function setCalendarView(view) {
 
 function updateIframe() {
   if (!currentCalendar) return;
-  const url = currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView);
+  const url = currentCalendar.includes("mode=") ? currentCalendar.replace(/mode=[^&]*/, "mode=" + currentView) : currentCalendar + "&mode=" + currentView;
   document.getElementById('calendarFrame').src = url;
 }
 

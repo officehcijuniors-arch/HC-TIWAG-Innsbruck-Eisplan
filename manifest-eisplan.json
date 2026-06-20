@@ -1,0 +1,12 @@
+{
+  "name": "HC TIWAG Innsbruck – Eisplan",
+  "short_name": "Eisplan",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#003789",
+  "theme_color": "#003789",
+  "icons": [
+    { "src": "HAI.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "HAI.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -132,10 +132,6 @@
 
 <div class="team-buttons">
   <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">U6/Laufs. - Skills/Prospect</button>
-
-  <!-- nur verschoben -->
-  <button onclick="setCalendarTeam('goaliesU9U11U13')" id="team-goaliesU9U11U13">U6/Laufs.</button>
-
   <button onclick="setCalendarTeam('u7')" id="team-u7">U8</button>
   <button onclick="setCalendarTeam('u9')" id="team-u9">U10</button>
   <button onclick="setCalendarTeam('u11')" id="team-u11">U12</button>
@@ -144,7 +140,8 @@
   <button onclick="setCalendarTeam('u17')" id="team-u17">U18</button>
   <button onclick="setCalendarTeam('u20')" id="team-u20">U20</button>
   <button onclick="setCalendarTeam('ice')" id="team-ice">ICE</button>
-  <button onclick="setCalendarTeam('goaliesU15U17U20')" id="team-goaliesU15U17U20">Goalies</button>
+  <button onclick="setCalendarTeam('goaliesU9U11U13')" id="team-goaliesU9U11U13">Goalies</button>
+  <button onclick="setCalendarTeam('goaliesU15U17U20')" id="team-goaliesU15U17U20">U6/Laufs.</button>
   <button onclick="setCalendarTeam('skillsProspect2')" id="team-skillsProspect2">Skills/Prospect</button>
 </div>
 
@@ -169,18 +166,18 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 const calendars = {
-  u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NmI2MDYwYjM5MTliZjkxNDAyZGJjODc0NmZjYTc3YjM2YTM1MTI5YjUyZmI3MmUxYzhkYjhkYjE0MmJmMmM5NkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzBlMTk1MjI4ZWNlNGFiNjJiZTcyMWU1MzcyMjY2MzZjYmVlMGEyZTMyOGE5ZWM1ZGQzYmU3MTliNmZmNzQxMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci.goo...etc",
+  u7lauf: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NmI2MDYwYjM5MTliZjkxNDAyZGJjODc0NmZjYTc3YjM2YTM1MTI5YjUyZmI3MmUxYzhkYjhkYjE0MmJmMmM5NkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzBlMTk1MjI4ZWNlNGFiNjJiZTcyMWU1MzcyMjY2MzZjYmVlMGEyZTMyOGE5ZWM1ZGQzYmU3MTliNmZmNzQxMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MmQ1YTQ3MzVhMjBkY2EyYTViYmFjZTc2NmQyNGY2ODA1MjJiZWQ1ZDQxNzg1MmFlNjMwYThmMzBhMzYxODU2OUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23f4511e&color=%237986cb&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441&color=%2342b3a8",
   u7: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6",
-  u9: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci.gcof",
-  u11: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci.gcof",
-  u13: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm",
-  u15: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm",
-  u17: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm",
-  u20: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm",
-  ice: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm",
-  goaliesU9U11U13: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=MmQ1YTQ3MzVhMjBkY2EyYTViYmFjZTc2NmQyNGY2ODA1MjJiZWQ1ZDQxNzg1MmFlNjMwYThmMzBhMzYxODU2OUBncm",
-  goaliesU15U17U20: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=NmI2MDYwYjM5MTliZjkxNDAyZGJjODc0NmZjYTc3YjM2YTM1MTI5YjUyZmI3MmUxYzhkYjhkYjE0MmJmMmM5NkBncm",
-  skillsProspect2: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=YzBlMTk1MjI4ZWNlNGFiNjJiZTcyMWU1MzcyMjY2MzZjYmVlMGEyZTMyOGE5ZWM1ZGQzYmU3MTliNmZmNzQxMUBncm"
+  u9: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23c0ca33",
+  u11: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%230b8043",
+  u13: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233f51b5",
+  u15: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%238e24aa",
+  u17: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161",
+  u20: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23ad1457",
+  ice: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23e4c441",
+  goaliesU9U11U13: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=MmQ1YTQ3MzVhMjBkY2EyYTViYmFjZTc2NmQyNGY2ODA1MjJiZWQ1ZDQxNzg1MmFlNjMwYThmMzBhMzYxODU2OUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%2342b3a8",
+  goaliesU15U17U20: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NmI2MDYwYjM5MTliZjkxNDAyZGJjODc0NmZjYTc3YjM2YTM1MTI5YjUyZmI3MmUxYzhkYjhkYjE0MmJmMmM5NkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23f4511e",
+  skillsProspect2: "https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&mode=WEEK&src=YzBlMTk1MjI4ZWNlNGFiNjJiZTcyMWU1MzcyMjY2MzZjYmVlMGEyZTMyOGE5ZWM1ZGQzYmU3MTliNmZmNzQxMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%237986cb"
 };
 
 function setCalendarTeam(team) {

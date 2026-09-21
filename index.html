@@ -381,15 +381,17 @@
   }
 
   @media (max-width: 680px) {
-    .official-variant .topbar { min-height: 94px; margin-inline: -10px; padding-inline: 16px; }
-    .official-variant .logo-container img:first-child { max-height: 64px; }
-    .official-variant .logo-container img:last-child { max-height: 34px; }
-    .official-variant .hero { grid-template-columns: 1fr; min-height: 590px; margin-inline: -10px; padding: 54px 18px 36px; }
-    .official-variant .title-block h1 { font-size: clamp(4rem, 24vw, 6.2rem); }
-    .hero-visual { position: absolute; inset: 0; min-height: 0; z-index: 1; opacity: .38; }
-    .shark-silhouette { inset: 80px -170px -80px 35%; width: 125%; height: 105%; }
-    .motion-badge { right: 18px; bottom: 18px; width: 145px; opacity: 1; }
-    .official-variant main { padding-top: 28px; }
+    .official-variant .topbar { min-height: 82px; margin-inline: -10px; padding: 10px 16px; }
+    .official-variant .logo-container img:first-child { max-height: 56px; }
+    .official-variant .logo-container img:last-child { max-height: 30px; }
+    .official-variant .hero { grid-template-columns: 1fr; min-height: 370px; margin-inline: -10px; padding: 34px 18px 24px; }
+    .official-variant .title-block h1 { font-size: clamp(3.8rem, 21vw, 4.8rem); }
+    .official-variant .hero-copy { max-width: calc(100% - 92px); margin-top: 18px; font-size: .9rem; line-height: 1.5; }
+    .hero-visual { position: absolute; inset: 0; min-height: 0; z-index: 1; }
+    .shark-silhouette { inset: 54px -170px -55px 35%; width: 125%; height: 105%; opacity: .34; }
+    .motion-badge { right: 14px; bottom: 14px; width: 112px; opacity: 1; }
+    .motion-badge span { display: none; }
+    .official-variant main { padding-top: 18px; }
     .official-variant .calendar-container {
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;

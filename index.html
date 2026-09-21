@@ -397,6 +397,23 @@
       -webkit-overflow-scrolling: touch;
     }
   }
+
+  @media (max-width: 680px) and (orientation: portrait) {
+    .hero-visual::before {
+      inset: 10% -4% 4% 30%;
+      opacity: .86;
+    }
+
+    .shark-silhouette {
+      inset: 8px -24px 8px 32%;
+      width: 78%;
+      height: calc(100% - 16px);
+      object-fit: cover;
+      object-position: 52% 55%;
+      opacity: .44;
+      transform: rotate(-2deg) scale(1.02);
+    }
+  }
 </style>
 </head>
 <body class="official-variant">

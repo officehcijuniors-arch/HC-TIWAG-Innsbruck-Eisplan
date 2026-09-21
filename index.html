@@ -2,7 +2,8 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Eisplan 2025/26</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HC TIWAG Innsbruck Eisplan 2026/27</title>
 <link rel="apple-touch-icon" href="HAI.png">
 <link rel="icon" type="image/png" href="HAI.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,150 +12,466 @@
 <meta name="theme-color" content="#003789">
 <link rel="manifest" href="manifest-eisplan.json">
 <style>
+  :root {
+    --hci-blue: #003789;
+    --hci-blue-dark: #00183e;
+    --hci-blue-deep: #000b22;
+    --hci-red: #d42323;
+    --hci-red-dark: #7b1414;
+    --ice: #f7fbff;
+    --mist: #c1cddf;
+    --panel: rgba(5, 20, 52, 0.76);
+    --line: rgba(193, 205, 223, 0.22);
+    --blue-glow: rgba(40, 149, 247, 0.38);
+    --red-glow: rgba(212, 35, 35, 0.32);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --shadow: 0 30px 80px rgba(0, 8, 28, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: dark; scroll-behavior: smooth; }
+
   body {
     margin: 0;
-    font-family: "Areno Serif", serif;
-    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-width: 320px;
     min-height: 100vh;
-    color: #fff;
     overflow-x: hidden;
+    color: var(--ice);
+    background:
+      radial-gradient(circle at 12% 5%, rgba(0, 55, 137, 0.78), transparent 35rem),
+      radial-gradient(circle at 92% 14%, rgba(212, 35, 35, 0.2), transparent 30rem),
+      linear-gradient(145deg, var(--hci-blue-deep) 0%, #031736 48%, #061127 100%);
+    font-family: "Areno Regular", "Arial Narrow", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .logo-container { display: flex; justify-content: center; align-items: flex-end; gap: 60px; margin: 20px 0 10px; }
-  .logo-container img { opacity: 0; transform: translateY(-20px); transition: transform 1s ease, opacity 1s ease; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  body::before {
+    inset: 0;
+    opacity: 0.16;
+    background-image:
+      linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black, transparent 65%);
+  }
+
+  body::after {
+    top: -28rem;
+    right: -24rem;
+    width: 56rem;
+    height: 56rem;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+    box-shadow: 0 0 120px var(--red-glow), inset 0 0 100px rgba(212,35,35,.08);
+  }
+
+  button, a { -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; }
+
+  .site-shell { width: min(1680px, 100%); margin-inline: auto; padding: 24px clamp(16px, 4vw, 64px) 40px; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 104px;
+    padding: 18px clamp(18px, 3vw, 34px);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: linear-gradient(120deg, rgba(0,55,137,.28), rgba(3,16,42,.82));
+    box-shadow: 0 18px 50px rgba(0,8,28,.35), inset 0 1px rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+  }
+
+  .logo-container { display: flex; align-items: center; gap: clamp(18px, 3vw, 44px); min-width: 0; }
+  .logo-container img { opacity: 0; transform: translateY(-14px); transition: transform .75s cubic-bezier(.2,.8,.2,1), opacity .75s ease, filter .25s ease; filter: drop-shadow(0 10px 20px rgba(0,0,0,.5)); }
   .logo-container.loaded img { opacity: 1; transform: translateY(0); }
-  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
-  .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
-  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
-  .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
-  .logo-container img:hover { transform: scale(1.05); }
+  .logo-container img:first-child { width: auto; max-height: 76px; }
+  .logo-container img:last-child { width: auto; max-height: 42px; border-radius: 5px; }
+  .logo-container img:hover { filter: drop-shadow(0 0 18px var(--blue-glow)); }
 
-  header { text-align: center; padding: 15px 10px; background: transparent; }
-  .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-  header h1 { font-size: 2em; margin: 0; }
-  header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
+  .season-mark { flex: none; padding-left: 28px; border-left: 1px solid var(--line); text-align: right; }
+  .season-mark span { display: block; color: var(--mist); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+  .season-mark strong { display: block; margin-top: 4px; font-size: 1.15rem; letter-spacing: .06em; }
 
-  .calendar-buttons, .team-buttons { display: flex; justify-content: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
-  .calendar-buttons button, .team-buttons button {
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 30px;
-    padding: 8px 18px;
-    font-size: 0.95em;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .calendar-buttons button:hover, .team-buttons button:hover { background: #d42323; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.35); }
-  .calendar-buttons button.active, .team-buttons button.active {
-    background: #fff;
-    color: #d42323;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.45);
-  }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); align-items: end; gap: 48px; padding: clamp(52px, 8vw, 112px) 4px clamp(38px, 5vw, 70px); }
+  .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; color: #88c8ff; font-size: .76rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+  .eyebrow::before { content: ""; width: 34px; height: 2px; background: var(--hci-red); box-shadow: 0 0 12px var(--red-glow); }
+  .title-block h1 { margin: 0; max-width: 850px; font-family: "ArticulatCF Bold", Impact, "Arial Narrow", sans-serif; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 900; letter-spacing: -.045em; line-height: .82; text-transform: uppercase; text-wrap: balance; }
+  .title-block h1 span { color: transparent; -webkit-text-stroke: 1px rgba(247,251,255,.55); text-shadow: 0 0 28px rgba(40,149,247,.12); }
+  .hero-copy { max-width: 440px; margin: 0 0 8px auto; color: var(--mist); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.65; }
 
-  .calendar-container { 
-    width: 90%;          
-    max-width: 1600px;   
-    height: 900px;        
-    background: rgba(255,255,255,0.06); 
-    border-radius: 30px; 
-    overflow: hidden; 
-    box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
-    border: 1px solid rgba(255,255,255,0.2); 
+  .control-panel {
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 28px;
+    margin-bottom: 18px;
+    padding: clamp(18px, 3vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(8,31,70,.92), rgba(2,15,39,.8));
+    box-shadow: 0 20px 55px rgba(0,8,28,.3), inset 0 1px rgba(255,255,255,.07);
+    backdrop-filter: blur(20px);
   }
-  .calendar-container::before {
+
+  .control-group { min-width: 0; }
+  .control-label { margin: 0 0 12px; color: #88a5c2; font-size: .7rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+  .calendar-buttons, .team-buttons { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+
+  .calendar-buttons button, .team-buttons button {
+    position: relative;
+    min-height: 42px;
+    padding: 10px 16px;
+    overflow: hidden;
+    color: #dbe8f4;
+    border: 1px solid rgba(193,205,223,.18);
+    border-radius: 999px;
+    background: rgba(255,255,255,.045);
+    font-size: .86rem;
+    font-weight: 750;
+    letter-spacing: .01em;
+    cursor: pointer;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  .calendar-buttons button:hover, .team-buttons button:hover { color: #fff; border-color: rgba(40,149,247,.7); background: rgba(0,55,137,.42); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,55,137,.24); }
+  .calendar-buttons button:focus-visible, .team-buttons button:focus-visible, .link-container a:focus-visible { outline: 3px solid #88c8ff; outline-offset: 3px; }
+  .calendar-buttons button.active, .team-buttons button.active { color: #fff; border-color: rgba(255,89,89,.8); background: linear-gradient(135deg, var(--hci-red), #a71822); box-shadow: 0 8px 26px var(--red-glow), inset 0 1px rgba(255,255,255,.2); }
+  .calendar-buttons button.active::after, .team-buttons button.active::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.2) 50%, transparent 75%); transform: translateX(-130%); animation: button-shine 4s ease-in-out infinite; }
+
+  .view-group { min-width: 285px; padding-left: 28px; border-left: 1px solid var(--line); }
+
+  .calendar-container {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: clamp(720px, 74vh, 940px);
+    overflow: hidden;
+    border: 1px solid rgba(193,205,223,.28);
+    border-radius: var(--radius-lg);
+    background: rgba(247,251,255,.96);
+    box-shadow: var(--shadow), 0 0 70px rgba(0,55,137,.14);
+  }
+  .calendar-container::before { content: ""; position: absolute; inset: 0 0 auto; z-index: 3; height: 4px; pointer-events: none; background: linear-gradient(90deg, var(--hci-blue), #2895f7 48%, var(--hci-red)); box-shadow: 0 0 25px var(--blue-glow); }
+  .calendar-container::after { content: ""; position: absolute; right: -80px; bottom: -80px; z-index: 2; width: 310px; height: 310px; pointer-events: none; background: url("HCI.gif") center / contain no-repeat; opacity: .055; filter: grayscale(1); }
+  .calendar-container iframe { width: 100%; height: 100%; border: 0; background: transparent; opacity: 1; transition: opacity .35s ease; position: relative; z-index: 1; }
+
+  .footer { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 34px 4px 8px; color: #8297ad; }
+  .footer-note { margin: 0; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .link-container { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+  .link-container a { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 9px 14px; color: #dbe8f4; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.035); font-size: .82rem; font-weight: 750; text-decoration: none; transition: transform .2s ease, color .2s ease, border-color .2s ease, background .2s ease; }
+  .link-container a span { font-size: 1rem; }
+  .link-container a:hover { color: #fff; border-color: rgba(40,149,247,.55); background: rgba(0,55,137,.3); transform: translateY(-2px); }
+  .signature { position: fixed; right: 12px; bottom: 8px; z-index: 5; color: rgba(193,205,223,.35); font-size: .68rem; letter-spacing: .12em; pointer-events: none; }
+
+  @keyframes button-shine { 0%, 65% { transform: translateX(-130%); } 85%, 100% { transform: translateX(130%); } }
+
+  @media (max-width: 980px) {
+    .hero { grid-template-columns: 1fr; gap: 26px; }
+    .hero-copy { margin-left: 0; }
+    .control-panel { grid-template-columns: 1fr; }
+    .view-group { min-width: 0; padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  }
+
+  @media (max-width: 680px) {
+    .site-shell { padding: 12px 10px 28px; }
+    .topbar { min-height: 84px; padding: 14px; border-radius: 18px; }
+    .logo-container { gap: 14px; }
+    .logo-container img:first-child { max-height: 58px; }
+    .logo-container img:last-child { max-width: 102px; max-height: 32px; }
+    .season-mark { padding-left: 14px; }
+    .season-mark span { display: none; }
+    .season-mark strong { font-size: .9rem; }
+    .hero { padding: 46px 5px 34px; }
+    .title-block h1 { font-size: clamp(2.85rem, 15vw, 5rem); }
+    .hero-copy { font-size: .95rem; }
+    .control-panel { gap: 18px; padding: 16px 12px; border-radius: 20px; }
+    .calendar-buttons, .team-buttons { gap: 7px; }
+    .calendar-buttons button, .team-buttons button { min-height: 40px; padding: 9px 13px; font-size: .8rem; }
+    .calendar-container { height: 760px; border-radius: 20px; }
+    .calendar-container::after { width: 210px; height: 210px; }
+    .footer { align-items: flex-start; flex-direction: column; padding-inline: 5px; }
+    .link-container { justify-content: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>
+<style>
+  /* Originalgetreuere HCI-Variante: helle Redaktionsebene, kräftige Markenflächen. */
+  body.official-variant {
+    color: #0b265c;
+    background: #fafafa;
+  }
+
+  body.official-variant::before {
+    opacity: .42;
+    background-image: linear-gradient(rgba(0,55,137,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0,55,137,.045) 1px, transparent 1px);
+    background-size: 84px 84px;
+    mask-image: linear-gradient(to bottom, black 0, transparent 78%);
+  }
+
+  body.official-variant::after {
+    top: -30rem;
+    right: -27rem;
+    border-color: rgba(0,55,137,.06);
+    box-shadow: none;
+  }
+
+  .official-variant .site-shell { width: min(1760px, 100%); padding-top: 0; }
+
+  .official-variant .topbar {
+    min-height: 124px;
+    margin-inline: calc(clamp(16px, 4vw, 64px) * -1);
+    padding-inline: clamp(22px, 6vw, 96px);
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0,55,137,.12);
+    backdrop-filter: none;
+  }
+
+  .official-variant .logo-container img { filter: none; }
+  .official-variant .logo-container img:first-child { max-height: 88px; }
+  .official-variant .logo-container img:last-child { max-height: 48px; }
+  .official-variant .logo-container img:hover { filter: drop-shadow(0 0 14px rgba(0,55,137,.26)); }
+  .official-variant .season-mark { border-left-color: #d9e1eb; }
+  .official-variant .season-mark span { color: #758696; }
+  .official-variant .season-mark strong { color: var(--hci-blue); }
+
+  .official-variant .hero {
+    position: relative;
+    isolation: isolate;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .72fr);
+    min-height: 565px;
+    margin-inline: calc(clamp(16px, 4vw, 64px) * -1);
+    padding: clamp(62px, 8vw, 118px) clamp(22px, 6vw, 96px);
+    overflow: hidden;
+    color: #fff;
+    background:
+      linear-gradient(105deg, rgba(0,24,62,.98) 0%, rgba(0,55,137,.95) 56%, rgba(0,47,116,.83) 100%),
+      radial-gradient(circle at 80% 30%, #2895f7, transparent 38%);
+  }
+
+  .official-variant .hero::before {
     content: "";
     position: absolute;
-    top: 50%; 
-    left: 50%;
-    width: 450px;       
-    height: 450px;
-    background: url("HCI.gif") no-repeat center;
-    background-size: contain;
-    opacity: 0.15;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    z-index: -2;
+    opacity: .2;
+    background-image: linear-gradient(118deg, transparent 55%, rgba(255,255,255,.18) 55.1%, transparent 55.5%), linear-gradient(62deg, transparent 72%, rgba(255,255,255,.13) 72.1%, transparent 72.6%);
+  }
+
+  .official-variant .hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(42vw, 650px);
+    height: 7px;
+    background: var(--hci-red);
+    box-shadow: 0 0 25px rgba(212,35,35,.7);
+  }
+
+  .official-variant .hero-content { position: relative; z-index: 3; }
+  .official-variant .eyebrow { color: #d6e8f7; }
+  .official-variant .title-block h1 { max-width: 760px; font-size: clamp(4.2rem, 9vw, 8.7rem); line-height: .78; }
+  .official-variant .title-block h1 span { color: #fff; -webkit-text-stroke: 0; text-shadow: none; }
+  .official-variant .hero-copy { max-width: 600px; margin: 30px 0 0; color: #d9e4ef; font-size: clamp(1rem, 1.35vw, 1.18rem); }
+
+  .hero-visual {
+    position: relative;
+    align-self: stretch;
+    min-height: 370px;
+  }
+
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 12% 0 0 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(80,171,255,.34), rgba(0,55,137,.08) 48%, transparent 72%);
+    filter: blur(8px);
+    animation: silhouette-glow 4.5s ease-in-out infinite alternate;
+  }
+
+  .shark-silhouette {
+    position: absolute;
+    inset: -95px -26px -115px -80px;
+    width: calc(100% + 130px);
+    height: calc(100% + 210px);
+    object-fit: cover;
+    object-position: 58% 57%;
+    opacity: .92;
+    mix-blend-mode: screen;
+    filter: invert(1) brightness(2);
+    transform: rotate(-3deg) scale(1.08);
     pointer-events: none;
-    z-index: 2;
-  }
-  .calendar-container iframe { 
-    width: 100%; 
-    height: 100%; 
-    border: 0; 
-    background: transparent; 
-    opacity: 1; 
-    transition: opacity 0.5s ease; 
-    position: relative; 
-    z-index: 1;
   }
 
-  .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
-  .link-container a { text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold; color: #fff; transition: transform 0.3s ease, color 0.3s ease; }
-  .link-container a span { font-size: 1.5em; transition: transform 0.3s ease; }
-  .link-container a:hover { transform: scale(1.1); color: #003789; }
-  .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
+  .motion-badge {
+    position: absolute;
+    right: 0;
+    bottom: -28px;
+    width: min(250px, 58%);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.98) 0 42%, rgba(255,255,255,.18) 43% 62%, transparent 63%);
+    box-shadow: 0 0 46px rgba(40,149,247,.55), 0 0 95px rgba(0,55,137,.45), inset 0 0 28px rgba(255,255,255,.28);
+  }
 
-  .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
+  .motion-badge::before { content: ""; position: absolute; inset: 9px; border: 1px dashed rgba(255,255,255,.48); border-radius: inherit; animation: badge-spin 22s linear infinite; }
+  .motion-badge img { width: 78%; height: 78%; object-fit: contain; border-radius: 50%; mix-blend-mode: multiply; }
+  .motion-badge span { position: absolute; top: 13%; left: -26%; padding: 8px 16px; color: #fff; background: var(--hci-red); font-size: .68rem; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; transform: rotate(-90deg); box-shadow: 0 0 16px rgba(212,35,35,.45); }
 
-  @media (max-width: 768px) { 
-    .calendar-container { width: 95%; height: 750px; } 
-    .calendar-container::before { width: 350px; height: 350px; } 
-    .logo-container img:first-child { max-height: 70px; } 
-    .logo-container img:last-child { max-height: 35px; } 
+  .official-variant main { padding-top: clamp(38px, 6vw, 76px); }
+  .official-variant .control-panel {
+    margin-bottom: 24px;
+    border-color: #dbe3ec;
+    background: #fff;
+    box-shadow: 0 18px 60px rgba(0,38,94,.1);
+    backdrop-filter: none;
+  }
+
+  .official-variant .control-label { color: #5d6c7b; }
+  .official-variant .view-group { border-left-color: #dbe3ec; }
+  .official-variant .calendar-buttons button,
+  .official-variant .team-buttons button { color: #0b265c; border-color: #d9e1eb; background: #f6f8fb; }
+  .official-variant .calendar-buttons button:hover,
+  .official-variant .team-buttons button:hover { color: #fff; border-color: var(--hci-blue); background: var(--hci-blue); box-shadow: 0 8px 22px rgba(0,55,137,.2); }
+  .official-variant .calendar-buttons button.active,
+  .official-variant .team-buttons button.active { color: #fff; border-color: var(--hci-red); background: var(--hci-red); box-shadow: 0 8px 24px rgba(212,35,35,.28); }
+
+  .official-variant .calendar-container { border-color: #d7e0e9; box-shadow: 0 28px 70px rgba(0,38,94,.18), 0 0 0 1px #fff inset; }
+  .official-variant .calendar-container::after { display: none; }
+  .official-variant .calendar-container,
+  .official-variant .calendar-container iframe {
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+  .official-variant .footer { color: #758696; }
+  .official-variant .link-container a { color: var(--hci-blue); border-color: #d9e1eb; background: #fff; }
+  .official-variant .link-container a:hover { color: #fff; border-color: var(--hci-blue); background: var(--hci-blue); }
+  .official-variant .signature { color: rgba(0,55,137,.28); }
+
+  @keyframes badge-spin { to { transform: rotate(360deg); } }
+  @keyframes silhouette-glow { from { opacity: .55; transform: scale(.96); } to { opacity: 1; transform: scale(1.04); } }
+
+  @media (max-width: 980px) {
+    .official-variant .hero { grid-template-columns: 1fr minmax(230px, .55fr); min-height: 520px; }
+    .official-variant .view-group { border-left: 0; border-top-color: #dbe3ec; }
+    .motion-badge { width: 190px; }
+  }
+
+  @media (max-width: 680px) {
+    .official-variant .topbar { min-height: 94px; margin-inline: -10px; padding-inline: 16px; }
+    .official-variant .logo-container img:first-child { max-height: 64px; }
+    .official-variant .logo-container img:last-child { max-height: 34px; }
+    .official-variant .hero { grid-template-columns: 1fr; min-height: 590px; margin-inline: -10px; padding: 54px 18px 36px; }
+    .official-variant .title-block h1 { font-size: clamp(4rem, 24vw, 6.2rem); }
+    .hero-visual { position: absolute; inset: 0; min-height: 0; z-index: 1; opacity: .38; }
+    .shark-silhouette { inset: 80px -170px -80px 35%; width: 125%; height: 105%; }
+    .motion-badge { right: 18px; bottom: 18px; width: 145px; opacity: 1; }
+    .official-variant main { padding-top: 28px; }
+    .official-variant .calendar-container {
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 </style>
 </head>
-<body>
+<body class="official-variant">
 
-<div class="logo-container">
-  <img src="HAI.png" alt="HAI Logo">
-  <img src="TIWAG.jpg" alt="TIWAG Logo">
-</div>
+<div class="site-shell">
+  <nav class="topbar" aria-label="Vereinskopf">
+    <div class="logo-container">
+      <img src="HAI.png" alt="Logo der HC TIWAG Innsbruck Haie">
+      <img src="TIWAG.jpg" alt="TIWAG Logo">
+    </div>
+    <div class="season-mark" aria-label="Saison 2026/27">
+      <span>Official Eisplan</span>
+      <strong>26 / 27</strong>
+    </div>
+  </nav>
 
-<header>
-  <div class="title-block">
-    <h1>HC TIWAG Innsbruck</h1>
-    <h2>Eisplan 2026/27</h2>
-  </div>
-</header>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="title-block">
+        <p class="eyebrow">HC TIWAG Innsbruck</p>
+        <h1>Eis<span>plan</span></h1>
+      </div>
+      <p class="hero-copy">Alle Trainings, Eiszeiten und Termine der Haie auf einen Blick. Team auswählen, Ansicht wechseln und bereit sein, wenn es aufs Eis geht.</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <img class="shark-silhouette" src="HCI_silhoutte_duenn.pdf.png" alt="">
+      <div class="motion-badge">
+        <img src="HCI.gif" alt="">
+        <span>Haie in Motion</span>
+      </div>
+    </div>
+  </header>
 
-<div class="calendar-buttons">
-  <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Terminansicht</button>
-  <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
-  <button onclick="setCalendarView('MONTH')" id="view-MONTH">Monat</button>
-</div>
+  <main>
+    <section class="control-panel" aria-label="Kalender filtern">
+      <div class="control-group">
+        <p class="control-label" id="team-label">Team auswählen</p>
+        <div class="team-buttons" aria-labelledby="team-label">
+          <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">Alle Teams</button>
+          <button onclick="setCalendarTeam('goaliesU15U17U20')" id="team-goaliesU15U17U20">U6 / Laufschule</button>
+          <button onclick="setCalendarTeam('u7')" id="team-u7">U8</button>
+          <button onclick="setCalendarTeam('u9')" id="team-u9">U10</button>
+          <button onclick="setCalendarTeam('u11')" id="team-u11">U12</button>
+          <button onclick="setCalendarTeam('u13')" id="team-u13">U14</button>
+          <button onclick="setCalendarTeam('u15')" id="team-u15">U16</button>
+          <button onclick="setCalendarTeam('u17')" id="team-u17">U18</button>
+          <button onclick="setCalendarTeam('u20')" id="team-u20">U20</button>
+          <button onclick="setCalendarTeam('ice')" id="team-ice">ICE</button>
+          <button onclick="setCalendarTeam('goaliesU9U11U13')" id="team-goaliesU9U11U13">Goalies</button>
+          <button onclick="setCalendarTeam('skillsProspect2')" id="team-skillsProspect2">Skills / Prospect</button>
+        </div>
+      </div>
 
-<div class="team-buttons">
-  <button onclick="setCalendarTeam('u7lauf')" id="team-u7lauf">U6/Laufs. - Skills/Prospect</button>
-  <button onclick="setCalendarTeam('goaliesU15U17U20')" id="team-goaliesU15U17U20">U6/Laufs.</button>
-  <button onclick="setCalendarTeam('u7')" id="team-u7">U8</button>
-  <button onclick="setCalendarTeam('u9')" id="team-u9">U10</button>
-  <button onclick="setCalendarTeam('u11')" id="team-u11">U12</button>
-  <button onclick="setCalendarTeam('u13')" id="team-u13">U14</button>
-  <button onclick="setCalendarTeam('u15')" id="team-u15">U16</button>
-  <button onclick="setCalendarTeam('u17')" id="team-u17">U18</button>
-  <button onclick="setCalendarTeam('u20')" id="team-u20">U20</button>
-  <button onclick="setCalendarTeam('ice')" id="team-ice">ICE</button>
-  <button onclick="setCalendarTeam('goaliesU9U11U13')" id="team-goaliesU9U11U13">Goalies</button>
-  
-  <button onclick="setCalendarTeam('skillsProspect2')" id="team-skillsProspect2">Skills/Prospect</button>
-</div>
+      <div class="control-group view-group">
+        <p class="control-label" id="view-label">Ansicht</p>
+        <div class="calendar-buttons" aria-labelledby="view-label">
+          <button onclick="setCalendarView('AGENDA')" id="view-AGENDA">Termine</button>
+          <button onclick="setCalendarView('WEEK')" id="view-WEEK">Woche</button>
+          <button onclick="setCalendarView('MONTH')" id="view-MONTH">Monat</button>
+        </div>
+      </div>
+    </section>
 
-<div class="calendar-container">
-  <iframe id="calendarFrame"></iframe>
-</div>
+    <div class="calendar-container">
+      <iframe id="calendarFrame"></iframe>
+    </div>
+  </main>
 
-<div class="link-container">
-  <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
-  <a href="https://www.instagram.com/hcijuniors/?hl=de" target="_blank"><span>📱</span> Instagram</a>
-  <a href="https://www.facebook.com/hcijuniors/?locale=de_DE" target="_blank"><span>📘</span> Facebook</a>
-  <a href="https://www.pictrs.com/hci" target="_blank"><span>📷</span> Foto Shop</a>
+  <footer class="footer">
+    <p class="footer-note">Wir sind Haie · #feelthepower</p>
+    <div class="link-container" aria-label="Weitere Links">
+      <a href="https://www.hcinnsbruck.at" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span> Website</a>
+      <a href="https://www.instagram.com/hcijuniors/?hl=de" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◎</span> Instagram</a>
+      <a href="https://www.facebook.com/hcijuniors/?locale=de_DE" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span> Facebook</a>
+      <a href="https://www.pictrs.com/hci" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◇</span> Foto Shop</a>
+    </div>
+  </footer>
 </div>
 
 <div class="signature">MS</div>
@@ -183,8 +500,13 @@ const calendars = {
 
 function setCalendarTeam(team) {
   document.getElementById('calendarFrame').src = calendars[team];
-  document.querySelectorAll('.team-buttons button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById('team-' + team).classList.add('active');
+  document.querySelectorAll('.team-buttons button').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+  const activeTeam = document.getElementById('team-' + team);
+  activeTeam.classList.add('active');
+  activeTeam.setAttribute('aria-pressed', 'true');
 }
 
 function setCalendarView(view) {
@@ -192,8 +514,13 @@ function setCalendarView(view) {
   let src = new URL(frame.src);
   src.searchParams.set('mode', view);
   frame.src = src.toString();
-  document.querySelectorAll('.calendar-buttons button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById('view-' + view).classList.add('active');
+  document.querySelectorAll('.calendar-buttons button').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+  const activeView = document.getElementById('view-' + view);
+  activeView.classList.add('active');
+  activeView.setAttribute('aria-pressed', 'true');
 }
 </script>
 
